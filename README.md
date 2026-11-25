@@ -1,6 +1,6 @@
 # GitHub Issue Auto-Labeler & Duplicate Finder
 
-Milestones 1–2 foundation for an NLP system that:
+An NLP system (Industry Track, milestones M1–M6) that:
 
 1. predicts a standardized issue category from the title and body; and
 2. retrieves earlier, semantically similar issues and recommends duplicate/manual review.
@@ -9,7 +9,32 @@ The project deliberately separates **classification labels** from **verified dup
 relationships**. A label such as `duplicate` is useful evidence, but it does not by itself
 identify the canonical issue.
 
-## What is ready
+**Start here:** [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) explains the whole project, the demo
+design, GitHub rate limits and the M3–M6 plan in plain language.
+
+| Milestone | Status | Evidence |
+| --- | --- | --- |
+| M1 Problem definition | ✅ Done | `docs/m1_m2/M1_M2_PROJECT_HANDBOOK.md` |
+| M2 Data preparation | ✅ Pilot done; full collection needs a token | `docs/m1_m2/M2_EDA_REPORT.md`, `data/raw/pilot/` |
+| M3 Models | ✅ Built and run on the pilot data | [`outputs/M3_RESULTS.md`](outputs/M3_RESULTS.md) |
+| M4 Evaluation | ⏳ Next | |
+| M5 Deployment (FastAPI + GitHub webhook) | ⏳ Planned | `docs/PROJECT_PLAN.md` §4–5 |
+| M6 Final delivery | ⏳ Planned | |
+
+## M3 quick start (models)
+
+```bash
+python3.13 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python scripts/prepare_dataset.py --input data/raw/pilot \
+  --taxonomy config/label_taxonomy.json --output data/processed
+.venv/bin/python scripts/train_models.py        # trains + selects on validation -> models/
+.venv/bin/python scripts/evaluate_retrieval.py  # TF-IDF vs BM25 vs embeddings vs hybrid
+.venv/bin/python -m unittest discover -s tests
+```
+
+To create a GitHub token, see [`docs/GITHUB_TOKEN_SETUP.md`](docs/GITHUB_TOKEN_SETUP.md).
+
+## What M1–M2 delivered
 
 - Auditable repository and label-taxonomy configuration.
 - GitHub REST collection with pagination, caching, rate-limit logging, checksums, and
@@ -21,7 +46,7 @@ identify the canonical issue.
 
 ## Quick start
 
-The pipeline uses only the Python standard library for Milestones 1–2.
+The M1–M2 pipeline uses only the Python standard library.
 
 ```bash
 # Small pilot: one Search API request per repository, at most 100 issues each
@@ -77,12 +102,15 @@ user. Never commit a token.
 - `src/issue_triage/`: reusable collection and preparation logic.
 - `data/raw/`: immutable snapshots returned by GitHub.
 - `data/processed/`: cleaned CSVs and quality metadata.
-- `outputs/`: presentation-ready handbook and reports.
+- `docs/`: project plan, token guide, and the M1/M2 handbook and reports.
+- `outputs/`: milestone results (M3 onwards) and the NLBSE baseline reproduction.
+- `experiments/experiment_log.jsonl`: one line per training/evaluation run.
+- `models/`: trained model bundle (not committed; rebuild with `scripts/train_models.py`).
 - `tests/`: cross-checks for cleaning, mapping, and leakage-sensitive fields.
 
 ## Presentation route
 
-Open `outputs/M1_M2_PROJECT_HANDBOOK.md` first. It contains the problem framing,
+Open `docs/m1_m2/M1_M2_PROJECT_HANDBOOK.md` first. It contains the problem framing,
 research decisions, data provenance, architecture, demo sequence, likely viva questions,
 and the exact boundary between completed work and later milestones.
 

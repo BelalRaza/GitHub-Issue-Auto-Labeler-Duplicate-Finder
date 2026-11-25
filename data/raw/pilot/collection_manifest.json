@@ -1,0 +1,226 @@
+{
+  "generated_at": "2026-10-28T17:56:42+00:00",
+  "record_count": 10,
+  "records": [
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:25+00:00",
+      "data_file": "microsoft__vscode.jsonl",
+      "github_total_count": 257478,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:microsoft/vscode is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "9",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "microsoft/vscode",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "b1de8a91244d48737e528852011987cb15d4d59983de08691bd650d70a4384ef",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:27+00:00",
+      "data_file": "microsoft__TypeScript.jsonl",
+      "github_total_count": 43705,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:microsoft/TypeScript is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "8",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "microsoft/TypeScript",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "de2ec24ea415efbf27e6290624244771b9ff045ed7e4970d4e2c880673c16537",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:28+00:00",
+      "data_file": "flutter__flutter.jsonl",
+      "github_total_count": 116505,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:flutter/flutter is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "7",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "flutter/flutter",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "03130027165e46d8911987614f07311c97cd7c89f126e447f8e8f083e18696d8",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:30+00:00",
+      "data_file": "kubernetes__kubernetes.jsonl",
+      "github_total_count": 49915,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:kubernetes/kubernetes is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "6",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "kubernetes/kubernetes",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "addc26d976a8a89978b2a6694f356402d90ca6f91fc9f73f84f3b99f7d6ed804",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:32+00:00",
+      "data_file": "pandas-dev__pandas.jsonl",
+      "github_total_count": 28644,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:pandas-dev/pandas is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "5",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "pandas-dev/pandas",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "45e8666240cf41c445839660ecc6d1aa6eb33b146a19bece8defabe655a89797",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:34+00:00",
+      "data_file": "scikit-learn__scikit-learn.jsonl",
+      "github_total_count": 12338,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:scikit-learn/scikit-learn is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "4",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "scikit-learn/scikit-learn",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "be7b5b55eebe9f49e11427ee3db078fd080a497a24787a4e970d809e736b4703",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:35+00:00",
+      "data_file": "huggingface__transformers.jsonl",
+      "github_total_count": 19707,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:huggingface/transformers is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "3",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "huggingface/transformers",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "9ba2dcab7acc719656dcd9b6f878751913f4249f7b1013845e03525da231dda2",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:37+00:00",
+      "data_file": "godotengine__godot.jsonl",
+      "github_total_count": 64236,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:godotengine/godot is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "2",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "godotengine/godot",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "510b762dabce3956061e8a2f6b4d03ce9b30e4e4af56a295a77db98944f20b30",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:39+00:00",
+      "data_file": "rust-lang__rust.jsonl",
+      "github_total_count": 64478,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:rust-lang/rust is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "1",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "rust-lang/rust",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "e4d9889deec4ebfb2f4b3b20895d47f8db9319d819da6f1239fb9d7704b1d5d4",
+      "sort": "created desc"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": false,
+      "collected_at": "2026-10-28T17:56:40+00:00",
+      "data_file": "ansible__ansible.jsonl",
+      "github_total_count": 33503,
+      "incomplete_results": false,
+      "limitation": "Recent-issue pilot snapshot; not a representative full-history sample.",
+      "mode": "search",
+      "query": "repo:ansible/ansible is:issue",
+      "rate_limit": {
+        "limit": "10",
+        "remaining": "0",
+        "reset": "1793210245",
+        "resource": "search"
+      },
+      "repository": "ansible/ansible",
+      "rows_written": 100,
+      "sample_limit": 100,
+      "sha256": "d59a284aa387882c0c0fa225647c65f2a3c77e1ca590aeda746d4ee0e578f999",
+      "sort": "created desc"
+    }
+  ]
+}

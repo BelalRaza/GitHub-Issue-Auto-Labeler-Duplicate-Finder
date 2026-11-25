@@ -6,3 +6,10 @@ __pycache__/
 data/raw/full/
 data/raw/*/*.tmp
 
+
+# M3+: regenerable artefacts (rebuild with scripts/prepare_dataset.py and scripts/train_models.py)
+data/processed/*.csv
+models/
+# Raw issue snapshots contain issue authors' usernames/profile data (see handbook risk register):
+# kept locally, not pushed. The checksum manifest IS committed so copies can be verified.
+data/raw/pilot/*.jsonl

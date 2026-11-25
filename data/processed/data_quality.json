@@ -1,0 +1,195 @@
+{
+  "classification_eligible_rows": 524,
+  "duplicate_label_rows": 5,
+  "duplicate_rows_by_key": 0,
+  "generated_at": "2026-10-28T18:01:50Z",
+  "missing_bodies": 3,
+  "model_contract": {
+    "feature_columns": [
+      "text_clean"
+    ],
+    "metadata_not_features": [
+      "issue_id",
+      "issue_number",
+      "url",
+      "labels_original",
+      "issue_type_original",
+      "state",
+      "state_reason",
+      "updated_at",
+      "closed_at",
+      "comments_count",
+      "is_duplicate_verified",
+      "has_duplicate_label"
+    ],
+    "optional_context_columns": [
+      "repository"
+    ],
+    "target_column": "classification_target"
+  },
+  "repositories": {
+    "ansible/ansible": 100,
+    "flutter/flutter": 100,
+    "godotengine/godot": 100,
+    "huggingface/transformers": 100,
+    "kubernetes/kubernetes": 100,
+    "microsoft/TypeScript": 100,
+    "microsoft/vscode": 100,
+    "pandas-dev/pandas": 100,
+    "rust-lang/rust": 100,
+    "scikit-learn/scikit-learn": 100
+  },
+  "split_distribution": {
+    "test": 80,
+    "train": 366,
+    "validation": 78
+  },
+  "target_distribution": {
+    "Bug": 421,
+    "Documentation": 35,
+    "Feature": 67,
+    "Question": 1
+  },
+  "target_source_distribution": {
+    "issue_type": 7,
+    "labels": 516,
+    "labels+issue_type": 1
+  },
+  "taxonomy_conflicts": 3,
+  "text_length_words": {
+    "max": 2998,
+    "median": 350,
+    "p90": 733
+  },
+  "top_original_labels": [
+    [
+      "bug",
+      183
+    ],
+    [
+      "Bug",
+      129
+    ],
+    [
+      "needs-triage",
+      74
+    ],
+    [
+      "C-bug",
+      58
+    ],
+    [
+      "T-compiler",
+      56
+    ],
+    [
+      "Needs Triage",
+      49
+    ],
+    [
+      "kind/bug",
+      46
+    ],
+    [
+      "topic:editor",
+      38
+    ],
+    [
+      "has_pr",
+      36
+    ],
+    [
+      "Needs Investigation",
+      31
+    ],
+    [
+      "triage/accepted",
+      29
+    ],
+    [
+      "sig/node",
+      27
+    ],
+    [
+      "has reproducible steps",
+      25
+    ],
+    [
+      "needs testing",
+      25
+    ],
+    [
+      "triage-needed",
+      25
+    ],
+    [
+      "T-libs",
+      25
+    ],
+    [
+      "archived",
+      22
+    ],
+    [
+      "bot_closed",
+      20
+    ],
+    [
+      "regression",
+      20
+    ],
+    [
+      "needs_template",
+      19
+    ],
+    [
+      "kind/flake",
+      18
+    ],
+    [
+      "affects_2.21",
+      17
+    ],
+    [
+      "module",
+      17
+    ],
+    [
+      "team-engine",
+      17
+    ],
+    [
+      "package",
+      16
+    ],
+    [
+      "sig/scheduling",
+      16
+    ],
+    [
+      "sig/api-machinery",
+      16
+    ],
+    [
+      "P2",
+      15
+    ],
+    [
+      "affects_2.23",
+      15
+    ],
+    [
+      "topic:rendering",
+      15
+    ]
+  ],
+  "total_rows": 1000,
+  "unique_repository_issue_keys": 1000,
+  "verified_duplicate_status_rows": 18,
+  "warnings": [
+    "Pilot search snapshots contain only the newest issues and are not a representative training corpus.",
+    "Current labels are retrospective targets; label assignment timestamps are not available in the issue list response.",
+    "Verified duplicate status does not always expose the canonical issue in REST list results; use GraphQL duplicateOf or audited maintainer comments for pair extraction.",
+    "The chronological split is provisional until the full-history collection and duplicate-pair audit are complete."
+  ]
+}

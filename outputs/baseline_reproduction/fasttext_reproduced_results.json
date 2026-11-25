@@ -1,0 +1,134 @@
+{
+  "bitcoin/bitcoin": {
+    "average": {
+      "f1-score": 0.6618371382046896,
+      "precision": 0.6639231782607076,
+      "recall": 0.6633333333333333
+    },
+    "bug": {
+      "f1-score": 0.6344086021505376,
+      "precision": 0.686046511627907,
+      "recall": 0.59
+    },
+    "feature": {
+      "f1-score": 0.7559808612440192,
+      "precision": 0.7247706422018348,
+      "recall": 0.79
+    },
+    "question": {
+      "f1-score": 0.5951219512195122,
+      "precision": 0.580952380952381,
+      "recall": 0.61
+    }
+  },
+  "facebook/react": {
+    "average": {
+      "f1-score": 0.7841580188875831,
+      "precision": 0.7852330430720982,
+      "recall": 0.7833333333333333
+    },
+    "bug": {
+      "f1-score": 0.9137055837563451,
+      "precision": 0.9278350515463918,
+      "recall": 0.9
+    },
+    "feature": {
+      "f1-score": 0.7487684729064039,
+      "precision": 0.7378640776699029,
+      "recall": 0.76
+    },
+    "question": {
+      "f1-score": 0.69,
+      "precision": 0.69,
+      "recall": 0.69
+    }
+  },
+  "microsoft/vscode": {
+    "average": {
+      "f1-score": 0.7275190868767833,
+      "precision": 0.7324896189545677,
+      "recall": 0.7266666666666667
+    },
+    "bug": {
+      "f1-score": 0.7195767195767195,
+      "precision": 0.7640449438202247,
+      "recall": 0.68
+    },
+    "feature": {
+      "f1-score": 0.6976744186046512,
+      "precision": 0.6521739130434783,
+      "recall": 0.75
+    },
+    "question": {
+      "f1-score": 0.7653061224489796,
+      "precision": 0.78125,
+      "recall": 0.75
+    }
+  },
+  "opencv/opencv": {
+    "average": {
+      "f1-score": 0.705875972103394,
+      "precision": 0.7127931341312898,
+      "recall": 0.71
+    },
+    "bug": {
+      "f1-score": 0.6145251396648046,
+      "precision": 0.6962025316455697,
+      "recall": 0.55
+    },
+    "feature": {
+      "f1-score": 0.7354260089686099,
+      "precision": 0.6666666666666666,
+      "recall": 0.82
+    },
+    "question": {
+      "f1-score": 0.7676767676767676,
+      "precision": 0.7755102040816326,
+      "recall": 0.76
+    }
+  },
+  "overall": {
+    "average": {
+      "f1-score": 0.7159475906550641,
+      "precision": 0.7194615058496004,
+      "recall": 0.7166666666666666
+    },
+    "bug": {
+      "f1-score": 0.7283662859527583,
+      "precision": 0.761122104024315,
+      "recall": 0.702
+    },
+    "feature": {
+      "f1-score": 0.7370436365552632,
+      "precision": 0.7140728376941542,
+      "recall": 0.7659999999999999
+    },
+    "question": {
+      "f1-score": 0.6824328494571708,
+      "precision": 0.6831895758303321,
+      "recall": 0.682
+    }
+  },
+  "tensorflow/tensorflow": {
+    "average": {
+      "f1-score": 0.7003477372028701,
+      "precision": 0.7028685548293392,
+      "recall": 0.7
+    },
+    "bug": {
+      "f1-score": 0.7596153846153846,
+      "precision": 0.7314814814814815,
+      "recall": 0.79
+    },
+    "feature": {
+      "f1-score": 0.7473684210526317,
+      "precision": 0.7888888888888889,
+      "recall": 0.71
+    },
+    "question": {
+      "f1-score": 0.5940594059405941,
+      "precision": 0.5882352941176471,
+      "recall": 0.6
+    }
+  }
+}

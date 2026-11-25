@@ -1,0 +1,20 @@
+{
+  "version": "0.3-m3",
+  "core_classes": ["Bug", "Feature", "Documentation"],
+  "core_classes_note": "Question is excluded from the core classifier: the M2 pilot found 1 example in 524. See docs/PROJECT_PLAN.md section 2.",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "classification": {
+    "min_confidence": 0.55,
+    "min_words": 6,
+    "min_words_note": "Issues shorter than this (title + body) carry too little information to label safely, e.g. 'help pls'.",
+    "min_confidence_note": "Below this top-class probability the system returns needs_manual_review. Provisional until calibrated on validation data in M4."
+  },
+  "retrieval": {
+    "default_method": "hybrid",
+    "top_k": 5,
+    "hybrid_weight_embedding": 0.6,
+    "duplicate_threshold": 0.85,
+    "review_threshold": 0.70,
+    "thresholds_note": "Provisional. M4 selects these on validation duplicate pairs only, never on the test split."
+  }
+}

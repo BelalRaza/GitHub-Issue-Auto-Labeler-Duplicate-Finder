@@ -1,0 +1,16 @@
+repository,actual,predicted_bug,predicted_feature,predicted_question
+facebook/react,bug,90,2,8
+facebook/react,feature,1,76,23
+facebook/react,question,6,25,69
+tensorflow/tensorflow,bug,79,1,20
+tensorflow/tensorflow,feature,7,71,22
+tensorflow/tensorflow,question,22,18,60
+microsoft/vscode,bug,68,17,15
+microsoft/vscode,feature,19,75,6
+microsoft/vscode,question,2,23,75
+bitcoin/bitcoin,bug,59,11,30
+bitcoin/bitcoin,feature,7,79,14
+bitcoin/bitcoin,question,20,19,61
+opencv/opencv,bug,55,33,12
+opencv/opencv,feature,8,82,10
+opencv/opencv,question,16,8,76
