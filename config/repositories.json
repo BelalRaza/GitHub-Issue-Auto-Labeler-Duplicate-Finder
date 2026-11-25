@@ -1,0 +1,57 @@
+{
+  "selection_date": "2026-10-28",
+  "selection_policy": "Public, active, issue-rich repositories with maintainer-applied labels and domain diversity. Final inclusion still depends on the M2 label-coverage audit.",
+  "repositories": [
+    {
+      "name": "microsoft/vscode",
+      "domain": "desktop developer tooling",
+      "rationale": "Large, actively triaged issue tracker; explicit bug, feature, question, and duplicate conventions."
+    },
+    {
+      "name": "microsoft/TypeScript",
+      "domain": "programming language/compiler",
+      "rationale": "Clear maintainer labels and well-documented duplicate-search workflow."
+    },
+    {
+      "name": "flutter/flutter",
+      "domain": "cross-platform UI framework",
+      "rationale": "High-volume issue tracker with documented triage practice and structured duplicate closure."
+    },
+    {
+      "name": "kubernetes/kubernetes",
+      "domain": "cloud infrastructure",
+      "rationale": "Mature kind/* taxonomy provides a useful contrast to simple label names."
+    },
+    {
+      "name": "pandas-dev/pandas",
+      "domain": "data science library",
+      "rationale": "Established Bug, Enhancement, and Documentation labels with rich issue text."
+    },
+    {
+      "name": "scikit-learn/scikit-learn",
+      "domain": "machine learning library",
+      "rationale": "Established issue taxonomy and technically descriptive reports."
+    },
+    {
+      "name": "huggingface/transformers",
+      "domain": "machine learning/NLP library",
+      "rationale": "Domain-relevant repository with large, active issue history."
+    },
+    {
+      "name": "godotengine/godot",
+      "domain": "game engine",
+      "rationale": "Active reports across platforms and visible maintainer-confirmed duplicate events."
+    },
+    {
+      "name": "rust-lang/rust",
+      "domain": "programming language/compiler",
+      "rationale": "Prefix-based label taxonomy and long-running issue history."
+    },
+    {
+      "name": "ansible/ansible",
+      "domain": "IT automation",
+      "rationale": "Operational-software issues broaden domain coverage and wording."
+    }
+  ]
+}
+
