@@ -1,0 +1,474 @@
+{
+  "generated_at": "2026-11-25T07:42:03+00:00",
+  "record_count": 10,
+  "records": [
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:36:17+00:00",
+      "data_file": "microsoft__vscode.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4984",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "microsoft/vscode",
+      "requests": [
+        {
+          "issue_rows_seen": 491,
+          "label": "feature-request",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 499,
+          "label": "*question",
+          "pages_fetched": 5,
+          "target": "Question"
+        },
+        {
+          "issue_rows_seen": 485,
+          "label": "*dev-question",
+          "pages_fetched": 5,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 1475,
+      "rows_written_after_deduplication": 1475,
+      "sha256": "7c2087f6c171d683b294eb95575a0d3266752b15c20d70828c282ea28ab7e998"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:36:49+00:00",
+      "data_file": "microsoft__TypeScript.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4967",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "microsoft/TypeScript",
+      "requests": [
+        {
+          "issue_rows_seen": 500,
+          "label": "Bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "Documentation",
+          "pages_fetched": 1,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 500,
+          "label": "Suggestion",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 15,
+          "label": "API Request",
+          "pages_fetched": 1,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 500,
+          "label": "Question",
+          "pages_fetched": 5,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 1515,
+      "rows_written_after_deduplication": 1515,
+      "sha256": "1d37b8056d46bbb412664ee9500d9d0bef6d3db12334fe47a7b726b280b23c2d"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:37:24+00:00",
+      "data_file": "flutter__flutter.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4964",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "flutter/flutter",
+      "requests": [
+        {
+          "issue_rows_seen": 0,
+          "label": "type: bug",
+          "pages_fetched": 1,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "a: documentation",
+          "pages_fetched": 1,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "type: new feature",
+          "pages_fetched": 1,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 0,
+      "rows_written_after_deduplication": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:37:26+00:00",
+      "data_file": "kubernetes__kubernetes.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4944",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "kubernetes/kubernetes",
+      "requests": [
+        {
+          "issue_rows_seen": 103,
+          "label": "kind/bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 65,
+          "label": "kind/documentation",
+          "pages_fetched": 5,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 68,
+          "label": "kind/feature",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 498,
+          "label": "kind/support",
+          "pages_fetched": 5,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 731,
+      "rows_written_after_deduplication": 731,
+      "sha256": "c31dc9d84358cfdf2bc8f04488b56c0bc96c51d455ebb3146e7d01f6adcc6d77"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:38:13+00:00",
+      "data_file": "pandas-dev__pandas.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4929",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "pandas-dev/pandas",
+      "requests": [
+        {
+          "issue_rows_seen": 88,
+          "label": "Bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 78,
+          "label": "Docs",
+          "pages_fetched": 5,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 335,
+          "label": "Enhancement",
+          "pages_fetched": 5,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 500,
+      "rows_written_after_deduplication": 500,
+      "sha256": "396ede04ddc6407707c3bef0be035773ca2077e63f7acbb3a15485ffb55d3f80"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:38:44+00:00",
+      "data_file": "scikit-learn__scikit-learn.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4907",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "scikit-learn/scikit-learn",
+      "requests": [
+        {
+          "issue_rows_seen": 493,
+          "label": "Bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 71,
+          "label": "Documentation",
+          "pages_fetched": 5,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 495,
+          "label": "New Feature",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 432,
+          "label": "Enhancement",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 121,
+          "label": "Question",
+          "pages_fetched": 2,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 1604,
+      "rows_written_after_deduplication": 1604,
+      "sha256": "c6009fd25bc9d002bf211d3abc786902eafc7c90476c20a862ba3bc23e97d073"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:39:28+00:00",
+      "data_file": "huggingface__transformers.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4889",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "huggingface/transformers",
+      "requests": [
+        {
+          "issue_rows_seen": 500,
+          "label": "bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 55,
+          "label": "documentation",
+          "pages_fetched": 2,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 496,
+          "label": "feature request",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 188,
+          "label": "new model",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "question",
+          "pages_fetched": 1,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 1233,
+      "rows_written_after_deduplication": 1233,
+      "sha256": "a3d149936fa3ff4edd18973ed7b4e5570a80d50631caf126fc04207003161278"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:40:04+00:00",
+      "data_file": "godotengine__godot.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4873",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "godotengine/godot",
+      "requests": [
+        {
+          "issue_rows_seen": 192,
+          "label": "bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 140,
+          "label": "documentation",
+          "pages_fetched": 5,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 23,
+          "label": "enhancement",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "question",
+          "pages_fetched": 1,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 351,
+      "rows_written_after_deduplication": 351,
+      "sha256": "75038bec02304902736dac7448830dd22cbd2d528d643989e6e46080698fb1cd"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:40:35+00:00",
+      "data_file": "rust-lang__rust.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4851",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "rust-lang/rust",
+      "requests": [
+        {
+          "issue_rows_seen": 499,
+          "label": "C-bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "T-doc",
+          "pages_fetched": 1,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 381,
+          "label": "A-docs",
+          "pages_fetched": 5,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 496,
+          "label": "C-feature-request",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 487,
+          "label": "C-enhancement",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "C-question",
+          "pages_fetched": 1,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 1828,
+      "rows_written_after_deduplication": 1828,
+      "sha256": "a6639bae82c3a3e6f4308f3ca6959d9e40d69e123d3afeca5579b119a8883eb8"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:41:19+00:00",
+      "data_file": "ansible__ansible.jsonl",
+      "max_pages_per_label": 5,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4830",
+        "reset": "1795595762",
+        "resource": "core"
+      },
+      "repository": "ansible/ansible",
+      "requests": [
+        {
+          "issue_rows_seen": 145,
+          "label": "bug",
+          "pages_fetched": 5,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 98,
+          "label": "docs",
+          "pages_fetched": 5,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 65,
+          "label": "feature",
+          "pages_fetched": 5,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 0,
+          "label": "feature_idea",
+          "pages_fetched": 1,
+          "target": "Feature"
+        },
+        {
+          "issue_rows_seen": 500,
+          "label": "support:core",
+          "pages_fetched": 5,
+          "target": "Question"
+        }
+      ],
+      "rows_written": 808,
+      "rows_written_after_deduplication": 808,
+      "sha256": "24c32d1d55e5f523c27bc2b6581b35c4bf4536e9776810ba77f3558b0bb5e73f"
+    }
+  ]
+}

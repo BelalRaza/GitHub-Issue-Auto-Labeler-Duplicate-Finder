@@ -84,6 +84,22 @@ class PreparationTests(unittest.TestCase):
         self.assertTrue(row["is_duplicate_verified"])
         self.assertTrue(row["has_duplicate_label"])
 
+    def test_repository_scope_split_keeps_time_order_within_each_repo(self):
+        from issue_triage.preparation import assign_chronological_splits
+
+        rows = []
+        for repo, start_year in (("a/old", 2015), ("b/new", 2026)):
+            for i in range(20):
+                rows.append({"repository": repo, "issue_number": i, "classification_eligible": True,
+                             "created_at": f"{start_year}-01-{i + 1:02d}T00:00:00Z", "split": ""})
+        assign_chronological_splits(rows, scope="repository")
+        for repo in ("a/old", "b/new"):
+            mine = sorted((r for r in rows if r["repository"] == repo), key=lambda r: r["created_at"])
+            splits = [r["split"] for r in mine]
+            self.assertEqual(splits.count("test"), 3)  # every repo contributes to test
+            self.assertEqual(splits[-1], "test")  # the newest issue is tested, never trained on
+            self.assertEqual(splits[0], "train")
+
     def test_jsonl_reader_does_not_split_unicode_line_separator(self):
         from tempfile import TemporaryDirectory
 

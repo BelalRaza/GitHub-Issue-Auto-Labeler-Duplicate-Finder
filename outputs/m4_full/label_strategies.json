@@ -1,0 +1,145 @@
+{
+  "generated_at": "2026-11-25T16:12:14+00:00",
+  "held_out_repositories": [
+    "ansible/ansible",
+    "godotengine/godot",
+    "huggingface/transformers",
+    "kubernetes/kubernetes",
+    "microsoft/TypeScript",
+    "microsoft/vscode",
+    "pandas-dev/pandas",
+    "rust-lang/rust",
+    "scikit-learn/scikit-learn"
+  ],
+  "results": {
+    "tfidf (class-balanced, current)": {
+      "unseen_repo_macro_f1": 0.6531,
+      "unseen_repo_macro_f1_with_repo_adaptation": 0.6676,
+      "per_repo": {
+        "ansible/ansible": 0.8566,
+        "godotengine/godot": 0.3543,
+        "huggingface/transformers": 0.7591,
+        "kubernetes/kubernetes": 0.6219,
+        "microsoft/TypeScript": 0.4501,
+        "microsoft/vscode": 0.5751,
+        "pandas-dev/pandas": 0.8177,
+        "rust-lang/rust": 0.6871,
+        "scikit-learn/scikit-learn": 0.756
+      },
+      "per_repo_adapted": {
+        "ansible/ansible": 0.8607,
+        "godotengine/godot": 0.3597,
+        "huggingface/transformers": 0.8274,
+        "kubernetes/kubernetes": 0.6297,
+        "microsoft/TypeScript": 0.4746,
+        "microsoft/vscode": 0.5828,
+        "pandas-dev/pandas": 0.8238,
+        "rust-lang/rust": 0.7092,
+        "scikit-learn/scikit-learn": 0.7408
+      },
+      "login_probes": [
+        {
+          "Bug": 0.193,
+          "Documentation": 0.122,
+          "Feature": 0.686
+        },
+        {
+          "Bug": 0.184,
+          "Documentation": 0.127,
+          "Feature": 0.689
+        },
+        {
+          "Bug": 0.448,
+          "Documentation": 0.076,
+          "Feature": 0.475
+        }
+      ]
+    },
+    "tfidf (repo-balanced)": {
+      "unseen_repo_macro_f1": 0.654,
+      "unseen_repo_macro_f1_with_repo_adaptation": 0.6725,
+      "per_repo": {
+        "ansible/ansible": 0.8728,
+        "godotengine/godot": 0.3292,
+        "huggingface/transformers": 0.7768,
+        "kubernetes/kubernetes": 0.6429,
+        "microsoft/TypeScript": 0.4661,
+        "microsoft/vscode": 0.5663,
+        "pandas-dev/pandas": 0.8243,
+        "rust-lang/rust": 0.6804,
+        "scikit-learn/scikit-learn": 0.727
+      },
+      "per_repo_adapted": {
+        "ansible/ansible": 0.872,
+        "godotengine/godot": 0.3488,
+        "huggingface/transformers": 0.8486,
+        "kubernetes/kubernetes": 0.6465,
+        "microsoft/TypeScript": 0.4852,
+        "microsoft/vscode": 0.5736,
+        "pandas-dev/pandas": 0.8266,
+        "rust-lang/rust": 0.7179,
+        "scikit-learn/scikit-learn": 0.7333
+      },
+      "login_probes": [
+        {
+          "Bug": 0.243,
+          "Documentation": 0.133,
+          "Feature": 0.624
+        },
+        {
+          "Bug": 0.295,
+          "Documentation": 0.159,
+          "Feature": 0.546
+        },
+        {
+          "Bug": 0.552,
+          "Documentation": 0.075,
+          "Feature": 0.372
+        }
+      ]
+    },
+    "ensemble (repo-balanced)": {
+      "unseen_repo_macro_f1": 0.6541,
+      "unseen_repo_macro_f1_with_repo_adaptation": 0.6686,
+      "per_repo": {
+        "ansible/ansible": 0.7624,
+        "godotengine/godot": 0.3311,
+        "huggingface/transformers": 0.7847,
+        "kubernetes/kubernetes": 0.6482,
+        "microsoft/TypeScript": 0.4933,
+        "microsoft/vscode": 0.6167,
+        "pandas-dev/pandas": 0.8364,
+        "rust-lang/rust": 0.6838,
+        "scikit-learn/scikit-learn": 0.7302
+      },
+      "per_repo_adapted": {
+        "ansible/ansible": 0.7939,
+        "godotengine/godot": 0.3406,
+        "huggingface/transformers": 0.8302,
+        "kubernetes/kubernetes": 0.6549,
+        "microsoft/TypeScript": 0.5059,
+        "microsoft/vscode": 0.6203,
+        "pandas-dev/pandas": 0.8345,
+        "rust-lang/rust": 0.7185,
+        "scikit-learn/scikit-learn": 0.7185
+      },
+      "login_probes": [
+        {
+          "Bug": 0.323,
+          "Documentation": 0.353,
+          "Feature": 0.325
+        },
+        {
+          "Bug": 0.18,
+          "Documentation": 0.531,
+          "Feature": 0.289
+        },
+        {
+          "Bug": 0.403,
+          "Documentation": 0.335,
+          "Feature": 0.262
+        }
+      ]
+    }
+  }
+}

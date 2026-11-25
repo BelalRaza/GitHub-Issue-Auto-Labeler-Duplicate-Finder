@@ -1,9 +1,9 @@
 {
-  "classification_eligible_rows": 524,
-  "duplicate_label_rows": 5,
+  "classification_eligible_rows": 12569,
+  "duplicate_label_rows": 89,
   "duplicate_rows_by_key": 0,
-  "generated_at": "2026-10-28T18:01:50Z",
-  "missing_bodies": 3,
+  "generated_at": "2026-11-25T16:28:55Z",
+  "missing_bodies": 77,
   "model_contract": {
     "feature_columns": [
       "text_clean"
@@ -28,164 +28,176 @@
     "target_column": "classification_target"
   },
   "repositories": {
-    "ansible/ansible": 100,
-    "flutter/flutter": 100,
-    "godotengine/godot": 100,
-    "huggingface/transformers": 100,
-    "kubernetes/kubernetes": 100,
-    "microsoft/TypeScript": 100,
-    "microsoft/vscode": 100,
-    "pandas-dev/pandas": 100,
-    "rust-lang/rust": 100,
-    "scikit-learn/scikit-learn": 100
+    "RocketChat/Rocket.Chat": 110,
+    "ansible-collections/ansible.posix": 1,
+    "ansible-collections/ansible.utils": 1,
+    "ansible/ansible": 1046,
+    "directus/directus": 471,
+    "excalidraw/excalidraw": 696,
+    "flutter/flutter": 738,
+    "godotengine/godot": 878,
+    "godotengine/godot-docs": 2,
+    "godotengine/godot-proposals": 2,
+    "huggingface/transformers": 1479,
+    "kubernetes/kubernetes": 923,
+    "microsoft/TypeScript": 1985,
+    "microsoft/vscode": 2426,
+    "nextcloud/server": 205,
+    "outline/outline": 293,
+    "pandas-dev/pandas": 591,
+    "rust-lang/goals": 1,
+    "rust-lang/libs-team": 1,
+    "rust-lang/rust": 2033,
+    "scikit-learn/scikit-learn": 1785,
+    "supabase/supabase": 635
   },
   "split_distribution": {
-    "test": 80,
-    "train": 366,
-    "validation": 78
+    "test": 1901,
+    "train": 8791,
+    "validation": 1877
   },
   "target_distribution": {
-    "Bug": 421,
-    "Documentation": 35,
-    "Feature": 67,
-    "Question": 1
+    "Bug": 4743,
+    "Documentation": 805,
+    "Feature": 5126,
+    "Question": 1895
   },
   "target_source_distribution": {
-    "issue_type": 7,
-    "labels": 516,
-    "labels+issue_type": 1
+    "issue_type": 54,
+    "labels": 12423,
+    "labels+issue_type": 92
   },
-  "taxonomy_conflicts": 3,
+  "taxonomy_conflicts": 548,
   "text_length_words": {
-    "max": 2998,
-    "median": 350,
-    "p90": 733
+    "max": 5099,
+    "median": 185,
+    "p90": 527
   },
   "top_original_labels": [
     [
       "bug",
-      183
+      2692
     ],
     [
       "Bug",
-      129
+      1400
+    ],
+    [
+      "enhancement",
+      946
     ],
     [
       "needs-triage",
-      74
-    ],
-    [
-      "C-bug",
-      58
+      857
     ],
     [
       "T-compiler",
-      56
+      797
     ],
     [
-      "Needs Triage",
-      49
+      "Enhancement",
+      770
     ],
     [
-      "kind/bug",
-      46
+      "Question",
+      621
     ],
     [
-      "topic:editor",
-      38
+      "C-bug",
+      586
     ],
     [
-      "has_pr",
-      36
+      "Feature request",
+      506
     ],
     [
-      "Needs Investigation",
-      31
+      "*question",
+      504
     ],
     [
-      "triage/accepted",
-      29
+      "Suggestion",
+      502
     ],
     [
-      "sig/node",
-      27
+      "feature-request",
+      501
     ],
     [
-      "has reproducible steps",
-      25
+      "kind/support",
+      498
     ],
     [
-      "needs testing",
-      25
+      "C-feature-request",
+      498
     ],
     [
-      "triage-needed",
-      25
+      "New Feature",
+      498
+    ],
+    [
+      "C-enhancement",
+      492
+    ],
+    [
+      "*dev-question",
+      485
     ],
     [
       "T-libs",
-      25
+      444
     ],
     [
-      "archived",
-      22
+      "Needs Triage",
+      420
     ],
     [
-      "bot_closed",
-      20
+      "has_pr",
+      415
     ],
     [
-      "regression",
-      20
+      "A-docs",
+      399
     ],
     [
-      "needs_template",
-      19
+      "external-issue",
+      354
     ],
     [
-      "kind/flake",
-      18
-    ],
-    [
-      "affects_2.21",
-      17
+      "kind/bug",
+      348
     ],
     [
       "module",
-      17
+      316
     ],
     [
-      "team-engine",
-      17
-    ],
-    [
-      "package",
-      16
-    ],
-    [
-      "sig/scheduling",
-      16
-    ],
-    [
-      "sig/api-machinery",
-      16
+      "topic:editor",
+      276
     ],
     [
       "P2",
-      15
+      269
     ],
     [
-      "affects_2.23",
-      15
+      "needs-sig",
+      255
     ],
     [
-      "topic:rendering",
-      15
+      "T-rustdoc",
+      252
+    ],
+    [
+      "Awaiting More Feedback",
+      241
+    ],
+    [
+      "verified",
+      237
     ]
   ],
-  "total_rows": 1000,
-  "unique_repository_issue_keys": 1000,
-  "verified_duplicate_status_rows": 18,
+  "total_rows": 16302,
+  "unique_repository_issue_keys": 16302,
+  "verified_duplicate_status_rows": 216,
   "warnings": [
     "Pilot search snapshots contain only the newest issues and are not a representative training corpus.",
     "Current labels are retrospective targets; label assignment timestamps are not available in the issue list response.",

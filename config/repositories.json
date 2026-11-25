@@ -51,7 +51,48 @@
       "name": "ansible/ansible",
       "domain": "IT automation",
       "rationale": "Operational-software issues broaden domain coverage and wording."
+    },
+    {
+      "name": "supabase/supabase",
+      "domain": "web backend platform (auth, database, dashboard)",
+      "rationale": "Auth/login-heavy web product; bug 4.2k, enhancement 0.4k, documentation 1.0k labelled issues.",
+      "added": "2026-11-25",
+      "added_reason": "Domain coverage: the first 10 repositories are all developer tools; the live demo (a web app) exposed the gap."
+    },
+    {
+      "name": "nextcloud/server",
+      "domain": "self-hosted web app (files, login, sharing)",
+      "rationale": "Large web application with login/session/UI issues; bug 12.9k, enhancement 5.0k.",
+      "added": "2026-11-25",
+      "added_reason": "Domain coverage: the first 10 repositories are all developer tools; the live demo (a web app) exposed the gap."
+    },
+    {
+      "name": "RocketChat/Rocket.Chat",
+      "domain": "web chat application",
+      "rationale": "Web/desktop chat app; type: bug 2.8k, type: feature 0.25k.",
+      "added": "2026-11-25",
+      "added_reason": "Domain coverage: the first 10 repositories are all developer tools; the live demo (a web app) exposed the gap."
+    },
+    {
+      "name": "directus/directus",
+      "domain": "web admin app / headless CMS",
+      "rationale": "Web admin UI and API; Bug 2.8k, Feature 0.19k.",
+      "added": "2026-11-25",
+      "added_reason": "Domain coverage: the first 10 repositories are all developer tools; the live demo (a web app) exposed the gap."
+    },
+    {
+      "name": "outline/outline",
+      "domain": "web knowledge-base app",
+      "rationale": "Web editor/login/UI issues; bug 2.7k, enhancement 0.9k.",
+      "added": "2026-11-25",
+      "added_reason": "Domain coverage: the first 10 repositories are all developer tools; the live demo (a web app) exposed the gap."
+    },
+    {
+      "name": "excalidraw/excalidraw",
+      "domain": "web drawing app (frontend)",
+      "rationale": "Pure frontend web app; bug 0.8k, enhancement 0.6k.",
+      "added": "2026-11-25",
+      "added_reason": "Domain coverage: the first 10 repositories are all developer tools; the live demo (a web app) exposed the gap."
     }
   ]
 }
-

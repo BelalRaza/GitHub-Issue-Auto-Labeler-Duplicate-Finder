@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue Triage</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --text: #1b1f24; --muted: #5d6673; --line: #dfe3e8;
+    --accent: #2f6fde; --accent-soft: #e6eefc; --ok: #1f8a4c; --ok-soft: #e3f4ea;
+    --warn: #a86400; --warn-soft: #fff1db; --bad: #c03a2b; --bad-soft: #fde8e6; --bar: #c9d6ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111418; --panel: #1a1e24; --text: #e6e9ee; --muted: #9aa4b2; --line: #2c323b;
+      --accent: #6c9cff; --accent-soft: #1d2a44; --ok: #4cc283; --ok-soft: #15301f;
+      --warn: #f0b049; --warn-soft: #3a2a10; --bad: #ff7b6b; --bad-soft: #3d1a16; --bar: #33415c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tab { border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 8px 14px;
+         border-radius: 8px; cursor: pointer; font: inherit; }
+  .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+  label { display: block; font-weight: 600; margin: 0 0 6px; }
+  input[type=text], textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line);
+         background: var(--bg); color: var(--text); font: inherit; }
+  textarea { min-height: 130px; resize: vertical; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .row input { flex: 1 1 320px; }
+  button.go { background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: 10px 18px; font: inherit;
+              font-weight: 600; cursor: pointer; }
+  button.go:disabled { opacity: .6; cursor: wait; }
+  .hint { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .hint a, td a[data-view], td a[data-sync], td a[data-delrepo], td a[data-delissue] { color: var(--accent); cursor: pointer; }
+  .step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .step:first-child { border-top: 0; padding-top: 0; }
+  .num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+         display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+  .step h3 { margin: 2px 0 6px; font-size: 15px; }
+  .pre { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; font: 12.5px/1.5 ui-monospace, Menlo, monospace;
+         white-space: pre-wrap; word-break: break-word; max-height: 160px; overflow: auto; color: var(--muted); }
+  .bars { display: grid; gap: 6px; }
+  .bar { display: grid; grid-template-columns: 120px 1fr 56px; align-items: center; gap: 8px; font-size: 14px; }
+  .track { height: 10px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .fill { height: 100%; background: var(--bar); }
+  .fill.top { background: var(--accent); }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-weight: 600; font-size: 13px; }
+  .b-ok { background: var(--ok-soft); color: var(--ok); }
+  .b-warn { background: var(--warn-soft); color: var(--warn); }
+  .b-bad { background: var(--bad-soft); color: var(--bad); }
+  .b-plain { background: var(--accent-soft); color: var(--accent); }
+  .cands { display: grid; gap: 8px; }
+  .cand { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 8px 10px;
+          border: 1px solid var(--line); border-radius: 8px; }
+  .cand a { color: var(--text); text-decoration: none; }
+  .cand a:hover { text-decoration: underline; }
+  .cand .meta { color: var(--muted); font-size: 12.5px; }
+  .score { font-variant-numeric: tabular-nums; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+  td a { color: var(--accent); }
+  .table-wrap { overflow-x: auto; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .stat { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+  .stat b { display: block; font-size: 20px; }
+  .stat span { color: var(--muted); font-size: 13px; }
+  .error { background: var(--bad-soft); color: var(--bad); border-radius: 8px; padding: 10px 12px; }
+  .muted { color: var(--muted); }
+  [hidden] { display: none !important; }
+  @media (max-width: 560px) { .bar { grid-template-columns: 96px 1fr 48px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>GitHub Issue Auto-Labeler &amp; Duplicate Finder</h1>
+  <p class="sub">Paste any public GitHub issue, and see how the model labels it and which older issues look the same. It only suggests; a human always decides.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="url">1 · Paste an issue link</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="text">Type an issue</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="repo">2 · Scan a repo</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="live">3 · Live bot feed</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="db">Database</button>
+  </div>
+
+  <section class="panel" data-pane="url">
+    <label for="issueUrl">GitHub issue link</label>
+    <div class="row">
+      <input id="issueUrl" type="text" placeholder="https://github.com/pandas-dev/pandas/issues/12345">
+      <button class="go" id="goUrl">Analyze</button>
+    </div>
+    <p class="hint">One GitHub API call. The model only reads the title and body; the maintainers' real label is shown afterwards for comparison.</p>
+  </section>
+
+  <section class="panel" data-pane="text" hidden>
+    <label for="title">Title</label>
+    <input id="title" type="text" placeholder="App crashes while uploading large images">
+    <div style="height:10px"></div>
+    <label for="body">Description</label>
+    <textarea id="body" placeholder="When I upload a 20 MB PNG the app freezes and then crashes with OutOfMemoryError..."></textarea>
+    <div style="height:10px"></div>
+    <button class="go" id="goText">Analyze</button>
+    <p class="hint">Works offline, with no GitHub call. Try:
+      <a data-ex="0">a crash</a> · <a data-ex="1">a feature idea</a> · <a data-ex="2">a docs typo</a> · <a data-ex="3">"help pls"</a></p>
+  </section>
+
+  <section class="panel" data-pane="repo" hidden>
+    <label for="repoUrl">GitHub repository link</label>
+    <div class="row">
+      <input id="repoUrl" type="text" placeholder="https://github.com/godotengine/godot">
+      <button class="go" id="goRepo">Scan newest issues</button>
+    </div>
+    <p class="hint">Labels the newest open issues with a single API call and compares with the maintainers' labels where they exist.</p>
+  </section>
+
+  <section class="panel" data-pane="live" hidden>
+    <div class="stats" id="stats"></div>
+    <div style="height:14px"></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>When</th><th>Issue</th><th>Label</th><th>Duplicate check</th><th>Source</th></tr></thead>
+      <tbody id="feed"><tr><td colspan="5" class="muted">No issues yet. Open an issue on the demo repo, and it appears here within seconds.</td></tr></tbody>
+    </table></div>
+    <p class="hint">Refreshes every 5 seconds. Raw numbers: <a href="/metrics" target="_blank">/metrics</a> · <a href="/health" target="_blank">/health</a></p>
+  </section>
+
+  <section class="panel" data-pane="db" hidden>
+    <label for="dbRepo">Add a repository</label>
+    <div class="row">
+      <input id="dbRepo" type="text" placeholder="owner/repo  or  https://github.com/owner/repo">
+      <button class="go" id="dbAddRepo">Add + fetch issues</button>
+    </div>
+    <p class="hint">Stored in SQLite (<span id="dbPath" class="muted"></span>). The bot compares a new issue only with the issues stored here for its repository, so deleting an issue here removes it from duplicate search. These controls work only on this computer, never through ngrok.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Repository</th><th>Issues</th><th>Last fetched from GitHub</th><th></th></tr></thead>
+      <tbody id="dbRepos"><tr><td colspan="4" class="muted">Loading…</td></tr></tbody>
+    </table></div>
+    <div id="dbIssues" hidden>
+      <div style="height:16px"></div>
+      <h3 id="dbIssuesTitle" style="margin:0 0 8px;font-size:16px"></h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>#</th><th>Title</th><th>Labels</th><th>Bot suggestion</th><th>Source</th><th></th></tr></thead>
+        <tbody id="dbIssueRows"></tbody>
+      </table></div>
+      <div style="height:12px"></div>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">Add an issue by hand</summary>
+        <div style="height:8px"></div>
+        <input id="dbIssueTitle" type="text" placeholder="Title">
+        <div style="height:8px"></div>
+        <textarea id="dbIssueBody" placeholder="Description (optional)" style="min-height:80px"></textarea>
+        <div style="height:8px"></div>
+        <div class="row">
+          <input id="dbIssueLabels" type="text" placeholder="Labels, comma-separated (e.g. bug)">
+          <button class="go" id="dbAddIssue">Add issue</button>
+        </div>
+      </details>
+      <div style="height:12px"></div>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">Show as JSON</summary>
+        <div style="height:8px"></div>
+        <div class="pre" id="dbJson" style="max-height:420px"></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="panel" id="result" hidden></section>
+</main>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pct = (x) => (x * 100).toFixed(0) + "%";
+const examples = [
+  ["App crashes while uploading large images", "When I upload a 20 MB PNG the app freezes and then crashes with OutOfMemoryError.\n\n```\njava.lang.OutOfMemoryError: Java heap space\n```"],
+  ["Add an option to export results as CSV", "It would be great if the results page had a button to download the table as a CSV file, so I can open it in Excel."],
+  ["Typo in the installation guide", "The README installation section says `pip instal mypackage` instead of `pip install mypackage`. The docs page has the same mistake."],
+  ["help pls", ""],
+];
+
+let liveTimer = null;
+document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach((x) => x.setAttribute("aria-selected", x === t));
+  document.querySelectorAll("[data-pane]").forEach((p) => p.hidden = p.dataset.pane !== t.dataset.tab);
+  $("#result").hidden = true;
+  clearInterval(liveTimer);
+  if (t.dataset.tab === "live") { refreshLive(); liveTimer = setInterval(refreshLive, 5000); }
+  if (t.dataset.tab === "db") loadRepos();
+}));
+document.querySelectorAll("[data-ex]").forEach((a) => a.addEventListener("click", () => {
+  const [t, b] = examples[+a.dataset.ex]; $("#title").value = t; $("#body").value = b;
+}));
+
+async function call(path, payload, button) {
+  button.disabled = true; const label = button.textContent; button.textContent = "Working…";
+  try {
+    const r = await fetch(path, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)});
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.detail ? (typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail)) : r.statusText);
+    return data;
+  } catch (e) {
+    showError(e.message); return null;
+  } finally { button.disabled = false; button.textContent = label; }
+}
+function showError(msg) { const el = $("#result"); el.hidden = false; el.innerHTML = `<div class="error">${esc(msg)}</div>`; }
+
+$("#goUrl").onclick = async () => { const d = await call("/analyze/issue-url", {url: $("#issueUrl").value}, $("#goUrl")); if (d) renderOne(d); };
+$("#goText").onclick = async () => { const d = await call("/predict", {title: $("#title").value, body: $("#body").value}, $("#goText")); if (d) renderOne(d); };
+$("#goRepo").onclick = async () => { const d = await call("/analyze/repo-url", {url: $("#repoUrl").value, max_issues: 30}, $("#goRepo")); if (d) renderRepo(d); };
+
+function decisionBadge(kind) {
+  return {
+    suggest_label: ["Suggest label", "b-ok"], needs_manual_review: ["Needs a human", "b-warn"],
+    possible_duplicate: ["Possible duplicate", "b-bad"], check_similar: ["Might be the same: check", "b-warn"],
+    no_strong_match: ["No strong match", "b-plain"],
+  }[kind] || [kind, "b-plain"];
+}
+function badge(kind, text) { const [t, c] = decisionBadge(kind); return `<span class="badge ${c}">${esc(text || t)}</span>`; }
+
+function renderOne(d) {
+  const c = d.classification, dup = d.duplicates, gh = d.github;
+  const probs = Object.entries(c.probabilities);
+  const top = probs[0][0];
+  const truth = gh ? (gh.maintainer_label_mapped
+      ? `Maintainers labelled it <b>${esc(gh.maintainer_label_mapped)}</b> ${gh.agrees_with_maintainers ? badge("suggest_label", "✓ matches") : badge("needs_manual_review", "✗ differs")}`
+      : `Maintainers' labels: ${gh.maintainer_labels.length ? gh.maintainer_labels.map(esc).join(", ") : "none"} (none map to our classes)`) : "";
+  const cands = dup.candidates.length ? dup.candidates.map((x) => `
+      <div class="cand"><div><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>
+        <div class="meta">${esc(x.repository)} #${x.issue_number} · opened ${esc((x.created_at || "").slice(0, 10))}</div></div>
+        <div class="score">${x.similarity.toFixed(2)}</div></div>`).join("") : `<p class="muted">No earlier issue to compare with.</p>`;
+  const el = $("#result"); el.hidden = false;
+  el.innerHTML = `
+    ${gh ? `<div class="step"><div class="num">1</div><div><h3>Fetched from GitHub</h3>
+      <a href="${esc(gh.url)}" target="_blank" rel="noopener">${esc(gh.repository)} #${gh.number}</a> · ${esc(gh.state)} · <span class="muted">1 API call</span></div></div>` : ""}
+    <div class="step"><div class="num">${gh ? 2 : 1}</div><div><h3>Cleaned the text</h3>
+      <p class="muted" style="margin:0 0 6px">Links became &lt;URL&gt;, @mentions became &lt;USER&gt;; code and error messages are kept. ${d.preprocessing.word_count} words.</p>
+      <div class="pre">${esc(d.preprocessing.cleaned_text_preview)}</div></div></div>
+    <div class="step"><div class="num">${gh ? 3 : 2}</div><div><h3>Classified it</h3>
+      <div class="bars">${probs.map(([k, v]) => `<div class="bar"><span>${esc(k)}</span><div class="track"><div class="fill ${k === top ? "top" : ""}" style="width:${pct(v)}"></div></div><span class="score">${pct(v)}</span></div>`).join("")}</div>
+      <p style="margin:10px 0 0">${badge(c.decision, c.decision === "suggest_label" ? "Suggested label: " + c.label : "Needs a human: " + (c.review_reason || ""))}</p>
+      ${truth ? `<p style="margin:8px 0 0">${truth}</p>` : ""}</div></div>
+    <div class="step"><div class="num">${gh ? 4 : 3}</div><div><h3>Searched ${dup.searched_issues.toLocaleString()} older issues for the same problem</h3>
+      <p class="muted" style="margin:0 0 8px">Method: ${esc(dup.method)} · only issues created before this one · “possible duplicate” at ≥ ${dup.thresholds.possible_duplicate}, “check by hand” at ≥ ${dup.thresholds.manual_review} (≥ ${dup.thresholds.short_issue_review} for very short issues)</p>
+      <div class="cands">${cands}</div></div></div>
+    <div class="step"><div class="num">${gh ? 5 : 4}</div><div><h3>Decision</h3>
+      ${badge(c.decision, c.decision === "suggest_label" ? "Label: " + c.label : "Label: needs a human")}
+      ${badge(dup.decision, {possible_duplicate: "Possible duplicate of #" + (dup.candidates[0] || {}).issue_number, check_similar: "Might be the same as #" + (dup.candidates[0] || {}).issue_number + ": check", no_strong_match: "No strong match"}[dup.decision])}
+      <p class="muted" style="margin:8px 0 0">Why: ${esc(dup.reason)}${c.review_reason ? " · Label: " + esc(c.review_reason) : ""}</p>
+      <p class="muted" style="margin:8px 0 0">Answered in ${d.latency_ms} ms · model ${esc(d.model.classifier || "")} · config ${esc(d.model.version || "")}</p></div></div>`;
+  el.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+function renderRepo(d) {
+  const a = d.agreement_with_maintainers;
+  const el = $("#result"); el.hidden = false;
+  el.innerHTML = `
+    <div class="stats">
+      <div class="stat"><b>${d.issues_analyzed}</b><span>issues labelled</span></div>
+      <div class="stat"><b>${a.rate == null ? "–" : pct(a.rate)}</b><span>agree with maintainers (${a.agreed}/${a.issues_with_a_comparable_label})</span></div>
+      <div class="stat"><b>${d.github_api_calls_for_this_scan}</b><span>GitHub API call</span></div>
+    </div><div style="height:12px"></div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Title</th><th>Our label</th><th>Maintainers</th><th>Most similar older issue</th></tr></thead><tbody>
+    ${d.issues.map((r) => `<tr>
+      <td><a href="${esc(r.url)}" target="_blank" rel="noopener">${r.number}</a></td>
+      <td>${esc(r.title)}</td>
+      <td>${r.predicted ? badge("suggest_label", r.predicted + " " + pct(r.confidence)) : badge("needs_manual_review", "review (" + r.top_guess + "?)")}</td>
+      <td>${r.maintainer_label ? esc(r.maintainer_label) + (r.agrees ? " ✓" : " ✗") : `<span class="muted">${r.maintainer_labels.length ? "other labels" : "unlabelled"}</span>`}</td>
+      <td>${r.top_match ? `<a href="${esc(r.top_match.url)}" target="_blank" rel="noopener">${esc(r.top_match.repository)}#${r.top_match.issue_number}</a> <span class="score">${r.top_match.similarity.toFixed(2)}</span> ${r.duplicate_decision === "possible_duplicate" ? badge("possible_duplicate") : ""}` : "–"}</td>
+    </tr>`).join("")}</tbody></table></div>`;
+}
+
+async function refreshLive() {
+  try {
+    const [m, e] = await Promise.all([fetch("/metrics").then((r) => r.json()), fetch("/events").then((r) => r.json())]);
+    const rl = m.github_rate_limit;
+    $("#stats").innerHTML = [
+      [m.issues_processed, "issues processed"],
+      [m.latency_ms ? m.latency_ms.p95 + " ms" : "–", "p95 latency"],
+      [m.manual_review_rate == null ? "–" : pct(m.manual_review_rate), "sent to a human"],
+      [(m.webhook.processed || 0), "webhook issues"],
+      [(m.bot_actions.comments_posted || 0), "bot comments"],
+      [rl.remaining == null ? "–" : rl.remaining + "/" + rl.limit, "GitHub calls left"],
+    ].map(([v, l]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+    if (e.events.length) $("#feed").innerHTML = e.events.map((x) => `<tr>
+      <td class="muted">${esc(x.at.slice(11, 19))}</td>
+      <td>${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.repository)}#${x.issue_number}</a> ` : ""}${esc(x.title)}</td>
+      <td>${x.label ? badge("suggest_label", x.label) : badge("needs_manual_review", "review")}</td>
+      <td>${badge(x.duplicate_decision)}${x.top_match ? ` <span class="muted">#${x.top_match.issue_number} ${x.top_match.similarity.toFixed(2)}</span>` : ""}</td>
+      <td class="muted">${esc(x.source)}</td></tr>`).join("");
+  } catch (_) { /* server restarting; try again next tick */ }
+}
+
+// ---------------------------------------------------------------- database tab
+let dbCurrent = null;
+async function dbCall(method, path, payload) {
+  const r = await fetch(path, {method, headers: {"Content-Type": "application/json"}, body: payload ? JSON.stringify(payload) : undefined});
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.detail || r.statusText);
+  return data;
+}
+async function loadRepos() {
+  try {
+    const d = await dbCall("GET", "/db/repos");
+    $("#dbPath").textContent = d.database;
+    $("#dbRepos").innerHTML = d.repositories.length ? d.repositories.map((r) => `<tr>
+      <td><a data-view="${esc(r.full_name)}">${esc(r.full_name)}</a></td>
+      <td>${r.issue_count}</td>
+      <td class="muted">${esc(r.last_synced_at || "never")}</td>
+      <td style="white-space:nowrap"><a data-view="${esc(r.full_name)}">View</a> · <a data-sync="${esc(r.full_name)}">Fetch again</a> · <a data-delrepo="${esc(r.full_name)}" style="color:var(--bad)">Delete</a></td>
+    </tr>`).join("") : `<tr><td colspan="4" class="muted">No repositories yet. Add one above, or open an issue on your demo repo.</td></tr>`;
+    if (dbCurrent && d.repositories.some((r) => r.full_name.toLowerCase() === dbCurrent.toLowerCase())) viewRepo(dbCurrent);
+    else { $("#dbIssues").hidden = true; dbCurrent = null; }
+  } catch (e) { $("#dbRepos").innerHTML = `<tr><td colspan="4"><div class="error">${esc(e.message)}</div></td></tr>`; }
+}
+async function viewRepo(name) {
+  dbCurrent = name;
+  const d = await dbCall("GET", `/db/repos/${name}/issues`);
+  $("#dbIssues").hidden = false;
+  $("#dbIssuesTitle").textContent = `${name}: ${d.issues.length} stored issues`;
+  $("#dbIssueRows").innerHTML = d.issues.length ? d.issues.map((i) => {
+    const p = i.prediction;
+    const guess = p ? (p.label ? badge("suggest_label", p.label + " " + pct(p.confidence)) : badge("needs_manual_review", "review (" + p.top_guess + "?)"))
+      + (p.top_match ? ` <span class="muted">≈ #${p.top_match.issue_number} ${p.top_match.similarity.toFixed(2)}</span>` : "") : `<span class="muted">not analysed</span>`;
+    return `<tr>
+      <td>${i.html_url ? `<a href="${esc(i.html_url)}" target="_blank" rel="noopener">${i.number}</a>` : i.number}</td>
+      <td>${esc(i.title)}</td>
+      <td class="muted">${esc(i.labels.join(", ") || "–")}</td>
+      <td>${guess}</td>
+      <td class="muted">${esc(i.source)}</td>
+      <td><a data-delissue="${i.number}" style="color:var(--bad)">Delete</a></td></tr>`;
+  }).join("") : `<tr><td colspan="6" class="muted">No issues stored for this repository.</td></tr>`;
+  $("#dbJson").textContent = JSON.stringify(d.issues.map(({data, ...rest}) => rest), null, 2);
+}
+document.addEventListener("click", async (ev) => {
+  const a = ev.target.closest("a[data-view],a[data-sync],a[data-delrepo],a[data-delissue]");
+  if (!a) return;
+  ev.preventDefault();
+  try {
+    if (a.dataset.view) await viewRepo(a.dataset.view);
+    if (a.dataset.sync) { a.textContent = "Fetching…"; await dbCall("POST", `/db/repos/${a.dataset.sync}/sync`); await loadRepos(); }
+    if (a.dataset.delrepo && confirm(`Delete ${a.dataset.delrepo} and all its stored issues from the database?`)) {
+      await dbCall("DELETE", `/db/repos/${a.dataset.delrepo}`); await loadRepos(); }
+    if (a.dataset.delissue && confirm(`Delete issue #${a.dataset.delissue} from the database? (It stays on GitHub.)`)) {
+      await dbCall("DELETE", `/db/repos/${dbCurrent}/issues/${a.dataset.delissue}`); await loadRepos(); }
+  } catch (e) { alert(e.message); }
+});
+$("#dbAddRepo").onclick = async () => {
+  const b = $("#dbAddRepo"); b.disabled = true; b.textContent = "Adding…";
+  try { const d = await dbCall("POST", "/db/repos", {repository: $("#dbRepo").value, sync: true});
+        dbCurrent = d.repository.full_name; $("#dbRepo").value = ""; await loadRepos(); }
+  catch (e) { alert(e.message); } finally { b.disabled = false; b.textContent = "Add + fetch issues"; }
+};
+$("#dbAddIssue").onclick = async () => {
+  if (!dbCurrent) return;
+  const labels = $("#dbIssueLabels").value.split(",").map((x) => x.trim()).filter(Boolean);
+  try { await dbCall("POST", `/db/repos/${dbCurrent}/issues`, {title: $("#dbIssueTitle").value, body: $("#dbIssueBody").value, labels});
+        $("#dbIssueTitle").value = $("#dbIssueBody").value = $("#dbIssueLabels").value = ""; await loadRepos(); }
+  catch (e) { alert(e.message); }
+};
+</script>
+</body>
+</html>

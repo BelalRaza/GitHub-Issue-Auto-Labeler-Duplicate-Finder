@@ -103,13 +103,36 @@ class PredictorTests(unittest.TestCase):
     def test_output_contract(self):
         result = self.predictor.predict("App crashes when uploading large images", "Stack trace attached.")
         self.assertIn(result["classification"]["decision"], {"suggest_label", "needs_manual_review"})
-        self.assertIn(result["duplicates"]["decision"], {"possible_duplicate", "needs_manual_review", "no_duplicate_found"})
+        self.assertIn(result["duplicates"]["decision"], {"possible_duplicate", "check_similar", "no_strong_match"})
         self.assertLessEqual(len(result["duplicates"]["candidates"]), 5)
 
     def test_short_issue_goes_to_manual_review(self):
         result = self.predictor.predict("help pls")
         self.assertEqual(result["classification"]["decision"], "needs_manual_review")
         self.assertIsNone(result["classification"]["label"])
+
+    def test_duplicate_decisions_are_honest_tiers(self):
+        import copy
+
+        from issue_triage.service.webhook import render_comment
+
+        predictor = copy.copy(self.predictor)
+        predictor.config = copy.deepcopy(self.predictor.config)
+        ret = predictor.config["retrieval"]
+        ret.update({"duplicate_threshold": 0.99, "review_threshold": 0.98, "short_issue_review_floor": 0.05})
+        # Short issue (< min_words) with a moderate match -> offered for checking (live demo #4/#5).
+        short = predictor.predict("upload crash image")
+        self.assertEqual(short["duplicates"]["decision"], "check_similar")
+        self.assertIn("Might be the same as", render_comment(short))
+        # Long issue with the same moderate match -> "no strong match", never "not a duplicate".
+        long = predictor.predict(
+            "upload crash image",
+            "the application window closes unexpectedly whenever someone tries this on a laptop",
+        )
+        self.assertEqual(long["duplicates"]["decision"], "no_strong_match")
+        comment = render_comment(long)
+        self.assertIn("Not sure", comment)
+        self.assertNotIn("No duplicate", comment)
 
     def test_empty_issue_is_rejected(self):
         with self.assertRaises(ValueError):

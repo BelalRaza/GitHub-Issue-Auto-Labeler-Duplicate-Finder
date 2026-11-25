@@ -1,5 +1,9 @@
 # Milestone 3 — Baseline & Model Development: first results
 
+> **Update (M4):** M4 found that picking a model on this small validation set is unreliable. It
+> switched to cross-validation and added an ensemble, which is now the model in use. See
+> [`M4_EVALUATION.md`](M4_EVALUATION.md). This file records the M3 state as it was.
+
 *Run on 25 Nov 2026 on the M2 **pilot** data (1,000 issues, 10 repositories).*
 *Every run is logged in `experiments/experiment_log.jsonl`.*
 

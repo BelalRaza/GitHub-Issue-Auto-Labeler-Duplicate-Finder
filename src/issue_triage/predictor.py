@@ -54,6 +54,7 @@ class TriagePredictor:
             live = json.loads(config_path.read_text(encoding="utf-8"))
             config = {
                 **config,
+                "version": live.get("version", config.get("version")),
                 "classification": {**config["classification"], **live.get("classification", {})},
                 "retrieval": {**config["retrieval"], **live.get("retrieval", {})},
             }
@@ -87,7 +88,11 @@ class TriagePredictor:
         created_at: str | None = None,
         issue_key: tuple[str, int] | None = None,
         top_k: int | None = None,
+        index: RetrievalIndex | None = None,
     ) -> dict:
+        """`index` overrides the search set (e.g. one repository's issues fetched live). Without
+        it, a known `repository` restricts the search to that repository; with neither, all
+        collected issues are searched (the "type an issue" demo)."""
         started = time.perf_counter()
         title = (title or "").strip()
         body = body or ""
@@ -95,9 +100,30 @@ class TriagePredictor:
             raise ValueError("an issue needs a title or a body")
         text = clean_issue_text(f"{title}\n\n{body}")
 
-        # Task 1: classification
+        # Where to look: the issue's own repository whenever we know it (see retrieval scope).
+        ret_cfg = self.config["retrieval"]
+        same_repo = ret_cfg.get("scope", "same_repository") == "same_repository"
+        if index is not None:
+            search_index, repo_filter = index, None
+            scope = f"same repository ({repository})" if repository else "given issue set"
+        elif repository and same_repo:
+            search_index, repo_filter = self.index, repository
+            scope = f"same repository ({repository})"
+        else:
+            search_index, repo_filter = self.index, None
+            scope = "all collected repositories (no repository given)"
+        in_one_repo = index is not None or repo_filter is not None
+
+        # Task 1: classification = general model, adjusted by this repository's own labels
         cls_cfg = self.config["classification"]
-        probs = self.classifier.predict_proba([text])[0]
+        classes = [str(c) for c in self.classifier.classes_]
+        general = self.classifier.predict_proba([text])[0]
+        probs, evidence, weight = general, [], 0.0
+        adapt = cls_cfg.get("repo_adaptation", {})
+        if adapt.get("enabled") and in_one_repo:
+            probs, evidence, weight = self._adapt_to_repository(
+                text, general, classes, search_index, repo_filter, created_at, issue_key, adapt
+            )
         order = np.argsort(-probs)
         best = int(order[0])
         confidence = float(probs[best])
@@ -110,31 +136,53 @@ class TriagePredictor:
         else:
             reason = None
         classification = {
-            "label": str(self.classifier.classes_[best]) if confident else None,
-            "top_guess": str(self.classifier.classes_[best]),
+            "label": classes[best] if confident else None,
+            "top_guess": classes[best],
             "confidence": round(confidence, 4),
             "decision": "suggest_label" if confident else "needs_manual_review",
             "review_reason": reason,
-            "probabilities": {
-                str(self.classifier.classes_[i]): round(float(probs[i]), 4) for i in order
-            },
+            "probabilities": {classes[i]: round(float(probs[i]), 4) for i in order},
+            "general_model_probabilities": {classes[i]: round(float(general[i]), 4) for i in np.argsort(-general)},
+            "repository_evidence": {"weight": round(weight, 3), "similar_labelled_issues": evidence},
         }
 
         # Task 2: similar-issue retrieval, past issues only, never the issue itself
-        ret_cfg = self.config["retrieval"]
-        candidates = self.index.search(
+        candidates = search_index.search(
             text,
             k=top_k or ret_cfg["top_k"],
             created_before=created_at,
             exclude=issue_key,
+            repository=repo_filter,
         )
+        searched = (
+            sum(1 for r in search_index.records if r.repository.lower() == repo_filter.lower())
+            if repo_filter else len(search_index.records)
+        )
+        # Three honest outcomes. M4 showed a similarity score alone cannot prove a duplicate, so
+        # the system never says "not a duplicate": below the thresholds it says "no strong match"
+        # and still shows the closest issues.
         top_similarity = candidates[0]["similarity"] if candidates else 0.0
-        if top_similarity >= ret_cfg["duplicate_threshold"]:
-            dup_decision = "possible_duplicate"
+        short_floor = ret_cfg.get("short_issue_review_floor", ret_cfg["review_threshold"])
+        if not candidates:
+            dup_decision, dup_reason = "no_strong_match", "no earlier issue in this repository to compare with"
+        elif top_similarity >= ret_cfg["duplicate_threshold"]:
+            dup_decision, dup_reason = "possible_duplicate", (
+                f"very similar to an earlier issue ({top_similarity:.2f} >= {ret_cfg['duplicate_threshold']})"
+            )
         elif top_similarity >= ret_cfg["review_threshold"]:
-            dup_decision = "needs_manual_review"
+            dup_decision, dup_reason = "check_similar", (
+                f"similar to an earlier issue ({top_similarity:.2f} >= {ret_cfg['review_threshold']}); a human should check"
+            )
+        elif too_short and top_similarity >= short_floor:
+            # Short texts score low even when they repeat an earlier issue (live demo #4/#5),
+            # so for them a moderate match is worth a human look.
+            dup_decision, dup_reason = "check_similar", (
+                f"short issue: scores run low, so the closest match ({top_similarity:.2f}) is worth checking"
+            )
         else:
-            dup_decision = "no_duplicate_found"
+            dup_decision, dup_reason = "no_strong_match", (
+                f"closest earlier issue scores {top_similarity:.2f}, below {ret_cfg['review_threshold']}"
+            )
         for candidate in candidates:
             candidate["above_review_threshold"] = candidate["similarity"] >= ret_cfg["review_threshold"]
 
@@ -152,13 +200,16 @@ class TriagePredictor:
             "classification": classification,
             "duplicates": {
                 "decision": dup_decision,
+                "reason": dup_reason,
                 "top_similarity": round(float(top_similarity), 4),
                 "thresholds": {
                     "possible_duplicate": ret_cfg["duplicate_threshold"],
                     "manual_review": ret_cfg["review_threshold"],
+                    "short_issue_review": short_floor,
                 },
-                "method": self.index.method,
-                "searched_issues": len(self.index.records),
+                "method": search_index.method,
+                "scope": scope,
+                "searched_issues": searched,
                 "candidates": candidates,
             },
             "model": {
@@ -168,6 +219,30 @@ class TriagePredictor:
             },
             "latency_ms": round((time.perf_counter() - started) * 1000, 1),
         }
+
+    @staticmethod
+    def _adapt_to_repository(text, general, classes, search_index, repo_filter, created_at, issue_key, adapt):
+        """Blend the general model with labels the repository's maintainers already gave to
+        similar, earlier issues (a similarity-weighted vote of the nearest labelled neighbours).
+
+        The general model knows what bugs and feature requests sound like in English; the
+        repository's own labels capture its conventions. The vote's weight grows with the
+        number of similar labelled issues found, up to `max_weight`.
+        """
+        neighbours = search_index.search(
+            text, k=adapt.get("k", 10), created_before=created_at, exclude=issue_key, repository=repo_filter
+        )
+        votes = np.zeros(len(classes))
+        evidence = []
+        for n in neighbours:
+            if n.get("label") in classes and n["similarity"] >= adapt.get("min_similarity", 0.45):
+                votes[classes.index(n["label"])] += n["similarity"]
+                evidence.append({"issue_number": n["issue_number"], "url": n["url"], "label": n["label"],
+                                 "similarity": n["similarity"]})
+        if not evidence:
+            return general, [], 0.0
+        weight = adapt.get("max_weight", 0.6) * min(1.0, len(evidence) / adapt.get("full_weight_at", 3))
+        return (1 - weight) * general + weight * votes / votes.sum(), evidence, weight
 
     def warmup(self) -> None:
         """Load lazy models now (at startup) so the first real request isn't slow."""

@@ -30,6 +30,7 @@ class IssueRecord:
     title: str
     created_at: str  # ISO-8601 UTC "YYYY-MM-DDTHH:MM:SSZ" -> string order == time order
     text: str
+    label: str | None = None  # maintainers' label mapped to our classes, if any (never a model input)
 
     @property
     def key(self) -> tuple[str, int]:
@@ -85,10 +86,14 @@ class RetrievalIndex:
         self._created = np.array([r.created_at or "" for r in self.records], dtype=object)
 
         self.tfidf = TfidfVectorizer(ngram_range=(1, 2), min_df=1, sublinear_tf=True)
+        self.embeddings: np.ndarray | None = None
+        if not texts:  # e.g. a brand-new repository: nothing to compare with yet
+            self.tfidf_matrix, self.bm25 = None, None
+            if method in ("embedding", "hybrid") and self.encoder is None:
+                self.method = "tfidf"
+            return
         self.tfidf_matrix = self.tfidf.fit_transform(texts)
         self.bm25 = _BM25().fit(texts) if method == "bm25" else None
-
-        self.embeddings: np.ndarray | None = None
         if method in ("embedding", "hybrid"):
             try:
                 if self.encoder is None:
@@ -141,6 +146,7 @@ class RetrievalIndex:
                 "url": self.records[i].url,
                 "title": self.records[i].title,
                 "created_at": self.records[i].created_at,
+                "label": self.records[i].label,
                 "similarity": round(float(scores[i]), 4),
             }
             for i in top
@@ -160,10 +166,36 @@ class RetrievalIndex:
         self._created = np.append(self._created, record.created_at or "")
         texts = [r.text for r in self.records]
         self.tfidf_matrix = self.tfidf.fit_transform(texts)
-        if self.bm25 is not None:
-            self.bm25.fit(texts)
-        if self.embeddings is not None:
-            self.embeddings = np.vstack([self.embeddings, self.encoder.encode([record.text])])
+        if self.method == "bm25":
+            self.bm25 = _BM25().fit(texts)
+        if self.method in ("embedding", "hybrid"):
+            new = self.encoder.encode([record.text])
+            self.embeddings = new if self.embeddings is None else np.vstack([self.embeddings, new])
+
+    def for_repository(self, repository: str, extra: list[IssueRecord] = ()) -> "RetrievalIndex":
+        """A small index holding only one repository's issues: duplicates live in the same repo
+        (164 of 173 verified pairs). `extra` adds that repo's issues fetched live from GitHub.
+        Embeddings of already-indexed issues are reused; only the extra ones are encoded."""
+        wanted = repository.lower()
+        rows = [i for i, r in enumerate(self.records) if r.repository.lower() == wanted]
+        known = {self.records[i].key for i in rows}
+        fresh = [r for r in dict((r.key, r) for r in extra).values() if r.key not in known]
+        records = [self.records[i] for i in rows] + fresh
+        embeddings = None
+        if self.method in ("embedding", "hybrid") and records:
+            parts = []
+            if rows:
+                parts.append(self.embeddings[rows])
+            if fresh:
+                parts.append(self.encoder.encode([r.text for r in fresh]))
+            embeddings = np.vstack(parts)
+        return RetrievalIndex(
+            records,
+            method=self.method,
+            embedding_model=self.encoder.model_name if self.encoder else None,
+            hybrid_weight_embedding=self.hybrid_weight,
+            embeddings=embeddings,
+        )
 
     def describe(self) -> dict:
         return {

@@ -1,0 +1,667 @@
+{
+  "split_sizes": {
+    "train": 5444,
+    "validation": 1537,
+    "test": 1570
+  },
+  "fitted_on": "train+validation",
+  "chosen_model": {
+    "name": "tfidf_logreg",
+    "params": {
+      "C": 4.0,
+      "class_weight": "balanced",
+      "word_ngrams": [
+        1,
+        2
+      ],
+      "char_ngrams": [
+        3,
+        5
+      ]
+    }
+  },
+  "test_comparison": {
+    "Majority class": {
+      "n": 1570,
+      "accuracy": 0.1885,
+      "macro_f1": 0.1058,
+      "weighted_f1": 0.0598,
+      "per_class": {
+        "Bug": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.1885,
+          "recall": 1.0,
+          "f1": 0.3173,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            0,
+            1190,
+            0
+          ],
+          [
+            0,
+            296,
+            0
+          ],
+          [
+            0,
+            84,
+            0
+          ]
+        ]
+      }
+    },
+    "TF-IDF + LogReg (C=4)": {
+      "n": 1570,
+      "accuracy": 0.8675,
+      "macro_f1": 0.7988,
+      "weighted_f1": 0.8748,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9754,
+          "recall": 0.8647,
+          "f1": 0.9167,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.6192,
+          "recall": 0.9392,
+          "f1": 0.7463,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.8333,
+          "recall": 0.6548,
+          "f1": 0.7333,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1029,
+            151,
+            10
+          ],
+          [
+            17,
+            278,
+            1
+          ],
+          [
+            9,
+            20,
+            55
+          ]
+        ]
+      }
+    },
+    "MiniLM embeddings + LogReg (C=4)": {
+      "n": 1570,
+      "accuracy": 0.7771,
+      "macro_f1": 0.6224,
+      "weighted_f1": 0.7999,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9528,
+          "recall": 0.7807,
+          "f1": 0.8582,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.6063,
+          "recall": 0.848,
+          "f1": 0.707,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.221,
+          "recall": 0.4762,
+          "f1": 0.3019,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            929,
+            139,
+            122
+          ],
+          [
+            26,
+            251,
+            19
+          ],
+          [
+            20,
+            24,
+            40
+          ]
+        ]
+      }
+    },
+    "Ensemble: TF-IDF + MiniLM": {
+      "n": 1570,
+      "accuracy": 0.872,
+      "macro_f1": 0.7769,
+      "weighted_f1": 0.8772,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9702,
+          "recall": 0.8765,
+          "f1": 0.921,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.6548,
+          "recall": 0.9291,
+          "f1": 0.7682,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.68,
+          "recall": 0.6071,
+          "f1": 0.6415,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1043,
+            125,
+            22
+          ],
+          [
+            19,
+            275,
+            2
+          ],
+          [
+            13,
+            20,
+            51
+          ]
+        ]
+      }
+    }
+  },
+  "confidence_threshold": {
+    "rule": "lowest threshold whose VALIDATION accuracy on auto-labelled issues >= 0.95",
+    "picked_on_validation": 0.9,
+    "validation": [
+      {
+        "threshold": 0.35,
+        "coverage": 1.0,
+        "accuracy_on_auto_labelled": 0.7781
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.9941,
+        "accuracy_on_auto_labelled": 0.7821
+      },
+      {
+        "threshold": 0.45,
+        "coverage": 0.9857,
+        "accuracy_on_auto_labelled": 0.7855
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.9636,
+        "accuracy_on_auto_labelled": 0.7907
+      },
+      {
+        "threshold": 0.55,
+        "coverage": 0.9297,
+        "accuracy_on_auto_labelled": 0.8041
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.8855,
+        "accuracy_on_auto_labelled": 0.82
+      },
+      {
+        "threshold": 0.65,
+        "coverage": 0.8458,
+        "accuracy_on_auto_labelled": 0.8369
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.797,
+        "accuracy_on_auto_labelled": 0.8555
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.7469,
+        "accuracy_on_auto_labelled": 0.8746
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.6942,
+        "accuracy_on_auto_labelled": 0.8922
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.6168,
+        "accuracy_on_auto_labelled": 0.9262
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.5172,
+        "accuracy_on_auto_labelled": 0.961
+      },
+      {
+        "threshold": 0.95,
+        "coverage": 0.3617,
+        "accuracy_on_auto_labelled": 0.9874
+      }
+    ],
+    "test_at_picked": {
+      "threshold": 0.9,
+      "coverage": 0.5777,
+      "accuracy_on_auto_labelled": 0.9603
+    },
+    "test": [
+      {
+        "threshold": 0.35,
+        "coverage": 1.0,
+        "accuracy_on_auto_labelled": 0.8675
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.9981,
+        "accuracy_on_auto_labelled": 0.8685
+      },
+      {
+        "threshold": 0.45,
+        "coverage": 0.9936,
+        "accuracy_on_auto_labelled": 0.8705
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.9803,
+        "accuracy_on_auto_labelled": 0.8759
+      },
+      {
+        "threshold": 0.55,
+        "coverage": 0.951,
+        "accuracy_on_auto_labelled": 0.8808
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.9255,
+        "accuracy_on_auto_labelled": 0.8913
+      },
+      {
+        "threshold": 0.65,
+        "coverage": 0.8936,
+        "accuracy_on_auto_labelled": 0.9002
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.8471,
+        "accuracy_on_auto_labelled": 0.909
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.7994,
+        "accuracy_on_auto_labelled": 0.9203
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.7369,
+        "accuracy_on_auto_labelled": 0.9326
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.6669,
+        "accuracy_on_auto_labelled": 0.9475
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.5777,
+        "accuracy_on_auto_labelled": 0.9603
+      },
+      {
+        "threshold": 0.95,
+        "coverage": 0.4338,
+        "accuracy_on_auto_labelled": 0.9765
+      }
+    ]
+  },
+  "robustness": {
+    "original": {
+      "macro_f1": 0.7988,
+      "accuracy": 0.8675,
+      "same_prediction_as_original": 1.0,
+      "ms_per_issue": 3.6
+    },
+    "title_only (empty body)": {
+      "macro_f1": 0.4463,
+      "accuracy": 0.4038,
+      "same_prediction_as_original": 0.4879,
+      "ms_per_issue": 0.11
+    },
+    "first_20_words": {
+      "macro_f1": 0.5488,
+      "accuracy": 0.5713,
+      "same_prediction_as_original": 0.6503,
+      "ms_per_issue": 0.18
+    },
+    "typos_15pct_words": {
+      "macro_f1": 0.7875,
+      "accuracy": 0.8618,
+      "same_prediction_as_original": 0.9866,
+      "ms_per_issue": 3.48
+    },
+    "lowercase_no_punctuation": {
+      "macro_f1": 0.7506,
+      "accuracy": 0.8172,
+      "same_prediction_as_original": 0.9369,
+      "ms_per_issue": 3.04
+    },
+    "very_long (x5 + log noise)": {
+      "macro_f1": 0.823,
+      "accuracy": 0.8847,
+      "same_prediction_as_original": 0.9758,
+      "ms_per_issue": 21.15
+    }
+  },
+  "edge_cases": {
+    "emoji_only": {
+      "classification_decision": "needs_manual_review",
+      "top_guess": "Feature",
+      "confidence": 0.7379,
+      "duplicate_decision": "no_duplicate_found",
+      "latency_ms": 1351.0
+    },
+    "non_english": {
+      "classification_decision": "suggest_label",
+      "top_guess": "Feature",
+      "confidence": 0.8079,
+      "duplicate_decision": "no_duplicate_found",
+      "latency_ms": 44.4
+    },
+    "50k_characters": {
+      "classification_decision": "suggest_label",
+      "top_guess": "Feature",
+      "confidence": 0.7013,
+      "duplicate_decision": "no_duplicate_found",
+      "latency_ms": 118.3
+    },
+    "only_code_block": {
+      "classification_decision": "suggest_label",
+      "top_guess": "Feature",
+      "confidence": 0.7157,
+      "duplicate_decision": "no_duplicate_found",
+      "latency_ms": 34.2
+    }
+  },
+  "repository_held_out": {
+    "per_repository": {
+      "ansible/ansible": {
+        "rows": 972,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.869,
+        "accuracy": 0.9002
+      },
+      "flutter/flutter": {
+        "rows": 48,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.0204,
+        "accuracy": 0.0208
+      },
+      "godotengine/godot": {
+        "rows": 674,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.3689,
+        "accuracy": 0.8131
+      },
+      "godotengine/godot-docs": {
+        "skipped": "2 rows, classes present ['Bug', 'Feature']"
+      },
+      "huggingface/transformers": {
+        "rows": 1210,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8121,
+        "accuracy": 0.9099
+      },
+      "kubernetes/kubernetes": {
+        "rows": 279,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.712,
+        "accuracy": 0.7885
+      },
+      "microsoft/TypeScript": {
+        "rows": 1026,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.5508,
+        "accuracy": 0.7505
+      },
+      "microsoft/vscode": {
+        "rows": 637,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.736,
+        "accuracy": 0.7928
+      },
+      "pandas-dev/pandas": {
+        "rows": 519,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8868,
+        "accuracy": 0.9056
+      },
+      "rust-lang/rust": {
+        "rows": 1742,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.7336,
+        "accuracy": 0.7813
+      },
+      "scikit-learn/scikit-learn": {
+        "rows": 1442,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8455,
+        "accuracy": 0.9015
+      }
+    },
+    "mean_macro_f1": 0.6535
+  },
+  "duplicate_threshold_interim": {
+    "method": "hybrid",
+    "queries_not_marked_duplicate": 4065,
+    "queries_closed_as_duplicate": 103,
+    "top1_similarity_percentiles_non_duplicates": {
+      "50": 0.4445,
+      "90": 0.6307,
+      "95": 0.8407,
+      "99": 0.9457
+    },
+    "top1_similarity_closed_as_duplicate": [
+      0.2795,
+      0.3212,
+      0.3234,
+      0.3267,
+      0.3495,
+      0.3506,
+      0.3748,
+      0.3834,
+      0.3874,
+      0.3888,
+      0.3939,
+      0.4055,
+      0.4103,
+      0.4173,
+      0.419,
+      0.4318,
+      0.4378,
+      0.4398,
+      0.4414,
+      0.443,
+      0.4431,
+      0.4432,
+      0.4499,
+      0.4515,
+      0.454,
+      0.4573,
+      0.4642,
+      0.4658,
+      0.4695,
+      0.4704,
+      0.4706,
+      0.4732,
+      0.4759,
+      0.4811,
+      0.4819,
+      0.4823,
+      0.4825,
+      0.4826,
+      0.4849,
+      0.4853,
+      0.4914,
+      0.4915,
+      0.4923,
+      0.4936,
+      0.4958,
+      0.4962,
+      0.4973,
+      0.5004,
+      0.5013,
+      0.5015,
+      0.5045,
+      0.5052,
+      0.5083,
+      0.5085,
+      0.5095,
+      0.5127,
+      0.5128,
+      0.5136,
+      0.5136,
+      0.5137,
+      0.5156,
+      0.5192,
+      0.5202,
+      0.5244,
+      0.5262,
+      0.5308,
+      0.5323,
+      0.5334,
+      0.5358,
+      0.537,
+      0.5391,
+      0.5436,
+      0.5608,
+      0.5616,
+      0.564,
+      0.5732,
+      0.5756,
+      0.578,
+      0.5888,
+      0.5889,
+      0.5941,
+      0.5999,
+      0.6003,
+      0.6097,
+      0.612,
+      0.614,
+      0.6176,
+      0.6192,
+      0.6215,
+      0.6234,
+      0.6303,
+      0.6663,
+      0.6709,
+      0.6814,
+      0.6916,
+      0.7201,
+      0.7258,
+      0.7312,
+      0.8336,
+      0.9104,
+      0.9936,
+      1.0,
+      1.0
+    ],
+    "share_of_non_duplicates_flagged_at_threshold": {
+      "0.5": 0.2792,
+      "0.6": 0.1208,
+      "0.7": 0.0748,
+      "0.8": 0.0583,
+      "0.85": 0.0467,
+      "0.9": 0.0244
+    },
+    "caveat": "No canonical pairs yet (needs a token). Flag rate on non-duplicates approximates the false-alarm rate only."
+  }
+}

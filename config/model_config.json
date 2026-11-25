@@ -1,20 +1,35 @@
 {
-  "version": "0.3-m3",
-  "core_classes": ["Bug", "Feature", "Documentation"],
+  "version": "0.7-owner-thresholds",
+  "core_classes": [
+    "Bug",
+    "Feature",
+    "Documentation"
+  ],
   "core_classes_note": "Question is excluded from the core classifier: the M2 pilot found 1 example in 524. See docs/PROJECT_PLAN.md section 2.",
   "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
   "classification": {
-    "min_confidence": 0.55,
-    "min_words": 6,
-    "min_words_note": "Issues shorter than this (title + body) carry too little information to label safely, e.g. 'help pls'.",
-    "min_confidence_note": "Below this top-class probability the system returns needs_manual_review. Provisional until calibrated on validation data in M4."
+    "min_confidence": 0.7,
+    "min_words": 8,
+    "min_words_note": "Issues shorter than this (title + body, after cleaning) go to manual review. Full-data M4: title-only input drops Macro-F1 from 0.80 to 0.45; live demo issues like 'Incorrect command in the setup.md file' (6 words).",
+    "min_confidence_note": "Set to 0.70 by the project owner after the live demo (0.85 sent too many correct labels to review). Full-data M4 trade-off at 0.70: ~85% of issues get a suggested label at ~91% accuracy (test).",
+    "repo_adaptation": {
+      "enabled": true,
+      "k": 10,
+      "min_similarity": 0.45,
+      "max_weight": 0.6,
+      "full_weight_at": 3,
+      "note": "Blend in a similarity-weighted vote of the repository's own labelled, earlier issues (provisional values; measured by scripts/compare_unseen_repos.py)."
+    }
   },
   "retrieval": {
+    "scope": "same_repository",
+    "scope_note": "Duplicates are searched only inside the issue's own repository: 164 of 173 verified duplicateOf pairs point to the same repo. With no repository (typed issue), all collected issues are searched.",
     "default_method": "hybrid",
     "top_k": 5,
     "hybrid_weight_embedding": 0.6,
-    "duplicate_threshold": 0.85,
-    "review_threshold": 0.70,
-    "thresholds_note": "Provisional. M4 selects these on validation duplicate pairs only, never on the test split."
+    "duplicate_threshold": 0.7,
+    "review_threshold": 0.55,
+    "thresholds_note": "Set by the project owner after the live demo: 'possible duplicate' from 0.70 (demo repeats scored 0.52-0.89 inside one repo). 'Check by hand' from 0.55. Search is same-repository only; the false-alarm rates for these values are measured in outputs/m4_full/retrieval_pairs_same_repo.json.",
+    "short_issue_review_floor": 0.5
   }
 }

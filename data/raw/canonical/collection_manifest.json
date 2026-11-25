@@ -1,0 +1,186 @@
+{
+  "generated_at": "2026-11-25T07:51:49+00:00",
+  "record_count": 15,
+  "records": [
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "ansible-collections__ansible.posix.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "ansible-collections/ansible.posix",
+      "rows_written": 1,
+      "sha256": "3d517ea8269e89ba4acad9b2e5281a49004276ffaa43b05efbfb19e8be47cf26"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "ansible-collections__ansible.utils.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "ansible-collections/ansible.utils",
+      "rows_written": 1,
+      "sha256": "c7be0b3c4e299264a47a8394e9ef0a9b615029b1b92120240c24daf845ea2aff"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "ansible__ansible.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "ansible/ansible",
+      "rows_written": 8,
+      "sha256": "6c49a32c7e50bf33eb8122735452bb7f901e5f82fd38cf5845939e866f94d928"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "flutter__flutter.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "flutter/flutter",
+      "rows_written": 24,
+      "sha256": "7695c41f62fbd5734278685637a0142c7c93f7903db07146381d82495b908dbf"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "godotengine__godot.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "godotengine/godot",
+      "rows_written": 15,
+      "sha256": "6d9785d7e6152768c701fe5e7522d0587ac84a86e60af576b6a4d5ba6e410ea4"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "godotengine__godot-docs.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "godotengine/godot-docs",
+      "rows_written": 2,
+      "sha256": "abbf775e867d3deab5555eed23f43664e6abced4cc83a4d08ccefc95f4ce9287"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "godotengine__godot-proposals.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "godotengine/godot-proposals",
+      "rows_written": 2,
+      "sha256": "026733e10a331eaa21761752ab41a6efce2f0e2e31b20a4b5a8c06b3f4b597a5"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "huggingface__transformers.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "huggingface/transformers",
+      "rows_written": 2,
+      "sha256": "28cf49abd584a7158ac78c4b1b77d60d8fb707d3767ad2221d7b38c3b09e4e06"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "kubernetes__kubernetes.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "kubernetes/kubernetes",
+      "rows_written": 1,
+      "sha256": "2cf99851a18ad714e6dec9dea1202e844553ae8d3a212d9ab0c611584794c9ea"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "microsoft__TypeScript.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "microsoft/TypeScript",
+      "rows_written": 6,
+      "sha256": "446fd9b818745a0a8d9c254d019b433801522b8d9cd0287f62dcb3f2b4af6830"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "microsoft__vscode.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "microsoft/vscode",
+      "rows_written": 16,
+      "sha256": "026f22a1037b320dcd6b56d2a4f6640de8dcbb14fa7eb37cbf8585d6b5e51ac1"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "pandas-dev__pandas.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "pandas-dev/pandas",
+      "rows_written": 2,
+      "sha256": "b3ec5b883ee189ca0c225d7dce201fcc6ebb8303a64d54a74ad1a1b3ffbf057e"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "rust-lang__goals.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "rust-lang/goals",
+      "rows_written": 1,
+      "sha256": "679ecc72cbdfd345e18d4b0276768e92c406d9081ff2d20599a0b3c62d1f75cc"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "rust-lang__libs-team.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "rust-lang/libs-team",
+      "rows_written": 1,
+      "sha256": "50f6f5c630fa157bc44f4fb994f68121f00464b4f34e0e0fed27707af772f7fb"
+    },
+    {
+      "authenticated": true,
+      "collected_at": "2026-11-25T07:50:28+00:00",
+      "data_file": "rust-lang__rust.jsonl",
+      "mode": "canonical",
+      "rate_limit": {
+        "remaining": "4514"
+      },
+      "repository": "rust-lang/rust",
+      "rows_written": 34,
+      "sha256": "6e4f8b134b7efa5128cea2e9acc2ec70239da469b4cab1a5bde1b682029ac0bc"
+    }
+  ]
+}

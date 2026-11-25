@@ -23,7 +23,19 @@ class Encoder:
         self.model_name = model_name
         self.batch_size = batch_size
 
-    def encode(self, texts: list[str]) -> np.ndarray:
+    def encode(self, texts: list[str], cache: bool = False) -> np.ndarray:
+        """`cache=True` memoises vectors per text (used by cross-validation, which re-encodes
+        the same training texts in every fold). Serving traffic leaves it off."""
+        if not cache:
+            return self._encode(texts)
+        store = _CACHE.setdefault(self.model_name, {})
+        missing = list(dict.fromkeys(t for t in texts if t not in store))
+        if missing:
+            for text, vector in zip(missing, self._encode(missing)):
+                store[text] = vector
+        return np.stack([store[t] for t in texts]) if texts else np.zeros((0, 0), np.float32)
+
+    def _encode(self, texts: list[str]) -> np.ndarray:
         model = _load(self.model_name)
         vectors = model.encode(
             texts,
@@ -33,3 +45,6 @@ class Encoder:
             convert_to_numpy=True,
         )
         return vectors.astype(np.float32)
+
+
+_CACHE: dict[str, dict[str, np.ndarray]] = {}

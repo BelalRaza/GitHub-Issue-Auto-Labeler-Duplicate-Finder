@@ -20,12 +20,33 @@ from sklearn.pipeline import FeatureUnion, Pipeline
 from .embeddings import Encoder
 
 
+def group_balanced_weights(labels: Sequence[str], groups: Sequence[str]) -> np.ndarray:
+    """Weight each example by 1 / (examples sharing its repository AND label).
+
+    Plain class balancing only equalises Bug/Feature/Docs overall. If one repository supplies
+    most of a class (VS Code: 498 Feature vs 139 Bug), the model can learn "this repository's
+    writing style -> Feature". Balancing every (repository, label) group removes that shortcut.
+    """
+    counts = Counter(zip(groups, labels))
+    weights = np.array([1.0 / counts[(g, l)] for g, l in zip(groups, labels)])
+    return weights * len(weights) / weights.sum()
+
+
+def _lr_settings(class_weight, labels, groups):
+    """Translate our class_weight option into (sklearn class_weight, sample_weight)."""
+    if class_weight == "repo_balanced":
+        if groups is None:
+            raise ValueError("class_weight='repo_balanced' needs the repository of each example")
+        return None, group_balanced_weights(labels, groups)
+    return class_weight, None
+
+
 class MajorityClassifier:
     """Always predicts the most frequent training label (shows what 'no understanding' scores)."""
 
     name = "majority"
 
-    def fit(self, texts: Sequence[str], labels: Sequence[str]) -> "MajorityClassifier":
+    def fit(self, texts: Sequence[str], labels: Sequence[str], groups=None) -> "MajorityClassifier":
         counts = Counter(labels)
         self.classes_ = np.array(sorted(counts))
         self.majority_ = counts.most_common(1)[0][0]
@@ -49,7 +70,8 @@ class TfidfLogReg:
         self.C = C
         self.class_weight = class_weight
 
-    def fit(self, texts: Sequence[str], labels: Sequence[str]) -> "TfidfLogReg":
+    def fit(self, texts: Sequence[str], labels: Sequence[str], groups=None) -> "TfidfLogReg":
+        lr_class_weight, sample_weight = _lr_settings(self.class_weight, labels, groups)
         features = FeatureUnion(
             [
                 (
@@ -69,12 +91,13 @@ class TfidfLogReg:
                 ("features", features),
                 (
                     "clf",
-                    LogisticRegression(C=self.C, class_weight=self.class_weight, max_iter=3000),
+                    LogisticRegression(C=self.C, class_weight=lr_class_weight, max_iter=3000),
                 ),
             ]
         )
         # The vectoriser vocabulary is learned here, from training texts only (no leakage).
-        self.pipeline_.fit(list(texts), list(labels))
+        fit_params = {} if sample_weight is None else {"clf__sample_weight": sample_weight}
+        self.pipeline_.fit(list(texts), list(labels), **fit_params)
         self.classes_ = self.pipeline_.classes_
         return self
 
@@ -90,26 +113,57 @@ class EmbeddingLogReg:
 
     name = "embedding_logreg"
 
-    def __init__(self, model_name: str, C: float = 4.0, class_weight: str | None = "balanced"):
+    def __init__(
+        self, model_name: str, C: float = 4.0, class_weight: str | None = "balanced", cache: bool = False
+    ):
         self.model_name = model_name
         self.C = C
         self.class_weight = class_weight
+        self.cache = cache
 
     def _encoder(self) -> Encoder:
         return Encoder(self.model_name)
 
-    def fit(self, texts: Sequence[str], labels: Sequence[str]) -> "EmbeddingLogReg":
-        vectors = self._encoder().encode(list(texts))
-        self.clf_ = LogisticRegression(C=self.C, class_weight=self.class_weight, max_iter=3000)
-        self.clf_.fit(vectors, list(labels))
+    def __getstate__(self):  # never pickle the experiment-only cache flag into the served model
+        return {**self.__dict__, "cache": False}
+
+    def fit(self, texts: Sequence[str], labels: Sequence[str], groups=None) -> "EmbeddingLogReg":
+        lr_class_weight, sample_weight = _lr_settings(self.class_weight, labels, groups)
+        vectors = self._encoder().encode(list(texts), cache=self.cache)
+        self.clf_ = LogisticRegression(C=self.C, class_weight=lr_class_weight, max_iter=3000)
+        self.clf_.fit(vectors, list(labels), sample_weight=sample_weight)
         self.classes_ = self.clf_.classes_
         return self
 
     def predict_proba(self, texts: Sequence[str]) -> np.ndarray:
-        return self.clf_.predict_proba(self._encoder().encode(list(texts)))
+        return self.clf_.predict_proba(self._encoder().encode(list(texts), cache=self.cache))
 
     def params(self) -> dict:
         return {"embedding_model": self.model_name, "C": self.C, "class_weight": self.class_weight}
+
+
+class AveragingEnsemble:
+    """Averages the probabilities of several models: word-matching + meaning-matching."""
+
+    name = "ensemble"
+
+    def __init__(self, members: Sequence):
+        self.members = list(members)
+
+    def fit(self, texts: Sequence[str], labels: Sequence[str], groups=None) -> "AveragingEnsemble":
+        for member in self.members:
+            member.fit(texts, labels, groups=groups)
+        self.classes_ = self.members[0].classes_
+        for member in self.members[1:]:
+            if list(member.classes_) != list(self.classes_):
+                raise ValueError("ensemble members disagree on class order")
+        return self
+
+    def predict_proba(self, texts: Sequence[str]) -> np.ndarray:
+        return np.mean([member.predict_proba(texts) for member in self.members], axis=0)
+
+    def params(self) -> dict:
+        return {"members": [{"model": m.name, **m.params()} for m in self.members]}
 
 
 def predict_labels(model, texts: Sequence[str]) -> list[str]:

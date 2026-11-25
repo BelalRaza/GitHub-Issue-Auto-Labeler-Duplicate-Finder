@@ -1,7 +1,12 @@
 {
-  "version": "0.1-pilot",
+  "version": "0.2-webapps",
   "review_status": "Provisional until the full M2 label-frequency and description audit is complete.",
-  "classes": ["Bug", "Feature", "Documentation", "Question"],
+  "classes": [
+    "Bug",
+    "Feature",
+    "Documentation",
+    "Question"
+  ],
   "policy": {
     "single_target_only": true,
     "case_insensitive": true,
@@ -10,75 +15,248 @@
     "note": "An issue is classification-eligible only when its labels map to exactly one standardized class. Multiple source labels mapping to the same class are allowed."
   },
   "global": {
-    "Bug": ["bug", "type: bug", "type/bug", "kind/bug", "c-bug"],
-    "Feature": ["feature", "feature request", "feature-request", "enhancement", "type: enhancement", "type: new feature", "kind/feature", "c-feature-request"],
-    "Documentation": ["documentation", "docs", "doc", "type: documentation", "kind/documentation", "t-doc"],
-    "Question": ["question", "type: question", "kind/support", "support", "c-question"]
+    "Bug": [
+      "bug",
+      "type: bug",
+      "type/bug",
+      "kind/bug",
+      "c-bug"
+    ],
+    "Feature": [
+      "feature",
+      "feature request",
+      "feature-request",
+      "enhancement",
+      "type: enhancement",
+      "type: new feature",
+      "kind/feature",
+      "c-feature-request"
+    ],
+    "Documentation": [
+      "documentation",
+      "docs",
+      "doc",
+      "type: documentation",
+      "kind/documentation",
+      "t-doc"
+    ],
+    "Question": [
+      "question",
+      "type: question",
+      "kind/support",
+      "support",
+      "c-question"
+    ]
   },
   "issue_types": {
-    "Bug": ["Bug"],
-    "Feature": ["Feature"],
-    "Documentation": ["Documentation"],
-    "Question": ["Question", "Support"]
+    "Bug": [
+      "Bug"
+    ],
+    "Feature": [
+      "Feature"
+    ],
+    "Documentation": [
+      "Documentation"
+    ],
+    "Question": [
+      "Question",
+      "Support"
+    ]
   },
   "repository_overrides": {
     "microsoft/vscode": {
-      "Question": ["*question", "*dev-question"],
-      "Feature": ["feature-request"]
+      "Question": [
+        "*question",
+        "*dev-question"
+      ],
+      "Feature": [
+        "feature-request"
+      ]
     },
     "microsoft/TypeScript": {
-      "Bug": ["Bug"],
-      "Feature": ["Suggestion", "API Request"],
-      "Documentation": ["Documentation"],
-      "Question": ["Question"]
+      "Bug": [
+        "Bug"
+      ],
+      "Feature": [
+        "Suggestion",
+        "API Request"
+      ],
+      "Documentation": [
+        "Documentation"
+      ],
+      "Question": [
+        "Question"
+      ]
     },
     "flutter/flutter": {
-      "Bug": ["type: bug"],
-      "Feature": ["type: new feature"],
-      "Documentation": ["a: documentation"]
+      "Bug": [
+        "type: bug"
+      ],
+      "Feature": [
+        "type: new feature"
+      ],
+      "Documentation": [
+        "a: documentation"
+      ]
     },
     "kubernetes/kubernetes": {
-      "Bug": ["kind/bug"],
-      "Feature": ["kind/feature"],
-      "Documentation": ["kind/documentation"],
-      "Question": ["kind/support"]
+      "Bug": [
+        "kind/bug"
+      ],
+      "Feature": [
+        "kind/feature"
+      ],
+      "Documentation": [
+        "kind/documentation"
+      ],
+      "Question": [
+        "kind/support"
+      ]
     },
     "pandas-dev/pandas": {
-      "Bug": ["Bug"],
-      "Feature": ["Enhancement"],
-      "Documentation": ["Docs"]
+      "Bug": [
+        "Bug"
+      ],
+      "Feature": [
+        "Enhancement"
+      ],
+      "Documentation": [
+        "Docs"
+      ]
     },
     "scikit-learn/scikit-learn": {
-      "Bug": ["Bug"],
-      "Feature": ["New Feature", "Enhancement"],
-      "Documentation": ["Documentation"],
-      "Question": ["Question"]
+      "Bug": [
+        "Bug"
+      ],
+      "Feature": [
+        "New Feature",
+        "Enhancement"
+      ],
+      "Documentation": [
+        "Documentation"
+      ],
+      "Question": [
+        "Question"
+      ]
     },
     "huggingface/transformers": {
-      "Bug": ["bug"],
-      "Feature": ["feature request", "new model"],
-      "Documentation": ["documentation"],
-      "Question": ["question"]
+      "Bug": [
+        "bug"
+      ],
+      "Feature": [
+        "feature request",
+        "new model"
+      ],
+      "Documentation": [
+        "documentation"
+      ],
+      "Question": [
+        "question"
+      ]
     },
     "godotengine/godot": {
-      "Bug": ["bug"],
-      "Feature": ["enhancement"],
-      "Documentation": ["documentation"],
-      "Question": ["question"]
+      "Bug": [
+        "bug"
+      ],
+      "Feature": [
+        "enhancement"
+      ],
+      "Documentation": [
+        "documentation"
+      ],
+      "Question": [
+        "question"
+      ]
     },
     "rust-lang/rust": {
-      "Bug": ["C-bug"],
-      "Feature": ["C-feature-request", "C-enhancement"],
-      "Documentation": ["T-doc", "A-docs"],
-      "Question": ["C-question"]
+      "Bug": [
+        "C-bug"
+      ],
+      "Feature": [
+        "C-feature-request",
+        "C-enhancement"
+      ],
+      "Documentation": [
+        "T-doc",
+        "A-docs"
+      ],
+      "Question": [
+        "C-question"
+      ]
     },
     "ansible/ansible": {
-      "Bug": ["bug"],
-      "Feature": ["feature", "feature_idea"],
-      "Documentation": ["docs"],
-      "Question": ["support:core"]
+      "Bug": [
+        "bug"
+      ],
+      "Feature": [
+        "feature",
+        "feature_idea"
+      ],
+      "Documentation": [
+        "docs"
+      ],
+      "Question": [
+        "support:core"
+      ]
+    },
+    "supabase/supabase": {
+      "Bug": [
+        "bug"
+      ],
+      "Feature": [
+        "enhancement"
+      ],
+      "Documentation": [
+        "documentation"
+      ]
+    },
+    "nextcloud/server": {
+      "Bug": [
+        "bug"
+      ],
+      "Feature": [
+        "enhancement"
+      ]
+    },
+    "RocketChat/Rocket.Chat": {
+      "Bug": [
+        "type: bug"
+      ],
+      "Feature": [
+        "type: feature"
+      ]
+    },
+    "directus/directus": {
+      "Bug": [
+        "Bug"
+      ],
+      "Feature": [
+        "Feature"
+      ]
+    },
+    "outline/outline": {
+      "Bug": [
+        "bug"
+      ],
+      "Feature": [
+        "enhancement"
+      ]
+    },
+    "excalidraw/excalidraw": {
+      "Bug": [
+        "bug"
+      ],
+      "Feature": [
+        "enhancement"
+      ]
     }
   },
-  "duplicate_evidence_labels": ["duplicate", "*duplicate", "r: duplicate", "kind/duplicate", "resolution: duplicate", "c-duplicate"]
+  "duplicate_evidence_labels": [
+    "duplicate",
+    "*duplicate",
+    "r: duplicate",
+    "kind/duplicate",
+    "resolution: duplicate",
+    "c-duplicate"
+  ]
 }
-

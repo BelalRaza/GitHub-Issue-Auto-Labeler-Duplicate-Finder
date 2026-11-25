@@ -15,6 +15,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data", type=Path, required=True)
     parser.add_argument("--quality", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--full", action="store_true", help="label the report as the full corpus, not the pilot")
     return parser.parse_args()
 
 
@@ -50,11 +51,21 @@ def main() -> int:
     split_rows = [[name, count] for name, count in sorted(quality["split_distribution"].items())]
     top_label_rows = [[name, count] for name, count in quality["top_original_labels"][:20]]
 
-    report = f"""# Milestone 2 EDA — Pilot Snapshot
+    if args.full:
+        header = """# Milestone 2 EDA — Full Corpus
+
+Generated from four checksum-verified snapshots (pilot, label-targeted, recent history, and the
+canonical originals of verified duplicates), merged and de-duplicated by (repository, issue).
+Label-targeted collection deliberately over-samples rare classes, so class shares below describe
+the **training corpus**, not how often each type occurs on GitHub."""
+    else:
+        header = """# Milestone 2 EDA — Pilot Snapshot
 
 Generated from the saved GitHub snapshot and its checksum manifest. This is a **pipeline-validation
 sample**, not the final modeling corpus: Search API collection is capped at 100 recent issues per
-repository and therefore over-represents current triage practice.
+repository and therefore over-represents current triage practice."""
+    split_title = "Chronological split" if args.full else "Provisional chronological split"
+    report = header + f"""
 
 ## Dataset health
 
@@ -78,7 +89,7 @@ repository and therefore over-represents current triage practice.
 
 {md_table(['Target', 'Rows', 'Share of eligible'], target_rows)}
 
-## Provisional chronological split
+## {split_title}
 
 {md_table(['Split', 'Rows'], split_rows)}
 

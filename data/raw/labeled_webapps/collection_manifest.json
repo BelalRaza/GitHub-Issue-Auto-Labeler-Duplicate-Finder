@@ -1,0 +1,210 @@
+{
+  "generated_at": "2026-11-25T16:27:22+00:00",
+  "record_count": 6,
+  "records": [
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:25:42+00:00",
+      "data_file": "supabase__supabase.jsonl",
+      "max_pages_per_label": 3,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "5000",
+        "reset": "1795627565",
+        "resource": "core"
+      },
+      "repository": "supabase/supabase",
+      "requests": [
+        {
+          "issue_rows_seen": 300,
+          "label": "bug",
+          "pages_fetched": 3,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 15,
+          "label": "documentation",
+          "pages_fetched": 3,
+          "target": "Documentation"
+        },
+        {
+          "issue_rows_seen": 293,
+          "label": "enhancement",
+          "pages_fetched": 3,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 607,
+      "rows_written_after_deduplication": 607,
+      "sha256": "d673eb8259a0c7c19ebccc07bd2ca1440a34d6426583e1f1ff5ddf9cf4bcc082"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:26:06+00:00",
+      "data_file": "nextcloud__server.jsonl",
+      "max_pages_per_label": 3,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4985",
+        "reset": "1795627543",
+        "resource": "core"
+      },
+      "repository": "nextcloud/server",
+      "requests": [
+        {
+          "issue_rows_seen": 71,
+          "label": "bug",
+          "pages_fetched": 3,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 112,
+          "label": "enhancement",
+          "pages_fetched": 3,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 183,
+      "rows_written_after_deduplication": 183,
+      "sha256": "92ada0d6e9ac68ca675bb3f4911483ad0b3d8cd7125ba45908db7abceed959ce"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:26:23+00:00",
+      "data_file": "RocketChat__Rocket.Chat.jsonl",
+      "max_pages_per_label": 3,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4979",
+        "reset": "1795627542",
+        "resource": "core"
+      },
+      "repository": "RocketChat/Rocket.Chat",
+      "requests": [
+        {
+          "issue_rows_seen": 41,
+          "label": "type: bug",
+          "pages_fetched": 3,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 68,
+          "label": "type: feature",
+          "pages_fetched": 3,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 108,
+      "rows_written_after_deduplication": 108,
+      "sha256": "3e3d210c474a57d710789cc248430b6f22b463bc362643169a771a1d0b4a6896"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:26:36+00:00",
+      "data_file": "directus__directus.jsonl",
+      "max_pages_per_label": 3,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4973",
+        "reset": "1795627542",
+        "resource": "core"
+      },
+      "repository": "directus/directus",
+      "requests": [
+        {
+          "issue_rows_seen": 290,
+          "label": "Bug",
+          "pages_fetched": 3,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 121,
+          "label": "Feature",
+          "pages_fetched": 3,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 411,
+      "rows_written_after_deduplication": 411,
+      "sha256": "3f83644150cee4f8f1c91b9b5dea27f7f1c08f8f65b7cc7db7b17ba27ddd042a"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:26:51+00:00",
+      "data_file": "outline__outline.jsonl",
+      "max_pages_per_label": 3,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4967",
+        "reset": "1795627543",
+        "resource": "core"
+      },
+      "repository": "outline/outline",
+      "requests": [
+        {
+          "issue_rows_seen": 96,
+          "label": "bug",
+          "pages_fetched": 3,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 193,
+          "label": "enhancement",
+          "pages_fetched": 3,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 289,
+      "rows_written_after_deduplication": 289,
+      "sha256": "45de9db0b5e370068696f982e1ae8e922406e0c032a314f6afe85039d7c7b985"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:27:07+00:00",
+      "data_file": "excalidraw__excalidraw.jsonl",
+      "max_pages_per_label": 3,
+      "mode": "labeled",
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "5000",
+        "reset": "1795627641",
+        "resource": "core"
+      },
+      "repository": "excalidraw/excalidraw",
+      "requests": [
+        {
+          "issue_rows_seen": 297,
+          "label": "bug",
+          "pages_fetched": 3,
+          "target": "Bug"
+        },
+        {
+          "issue_rows_seen": 298,
+          "label": "enhancement",
+          "pages_fetched": 3,
+          "target": "Feature"
+        }
+      ],
+      "rows_written": 594,
+      "rows_written_after_deduplication": 594,
+      "sha256": "a9200d31a9359f1371cd47df2ca7c9be8fbecc425bb670e537a885cf647ad8b7"
+    }
+  ]
+}

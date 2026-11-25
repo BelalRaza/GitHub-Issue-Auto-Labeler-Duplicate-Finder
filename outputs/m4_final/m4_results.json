@@ -1,0 +1,717 @@
+{
+  "split_sizes": {
+    "train": 5444,
+    "validation": 1537,
+    "test": 1570
+  },
+  "fitted_on": "train+validation",
+  "chosen_model": {
+    "name": "tfidf_logreg",
+    "params": {
+      "C": 4.0,
+      "class_weight": "repo_balanced",
+      "word_ngrams": [
+        1,
+        2
+      ],
+      "char_ngrams": [
+        3,
+        5
+      ]
+    }
+  },
+  "test_comparison": {
+    "Majority class": {
+      "n": 1570,
+      "accuracy": 0.1885,
+      "macro_f1": 0.1058,
+      "weighted_f1": 0.0598,
+      "per_class": {
+        "Bug": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.1885,
+          "recall": 1.0,
+          "f1": 0.3173,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            0,
+            1190,
+            0
+          ],
+          [
+            0,
+            296,
+            0
+          ],
+          [
+            0,
+            84,
+            0
+          ]
+        ]
+      }
+    },
+    "TF-IDF + LogReg (C=4)": {
+      "n": 1570,
+      "accuracy": 0.8675,
+      "macro_f1": 0.7988,
+      "weighted_f1": 0.8748,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9754,
+          "recall": 0.8647,
+          "f1": 0.9167,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.6192,
+          "recall": 0.9392,
+          "f1": 0.7463,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.8333,
+          "recall": 0.6548,
+          "f1": 0.7333,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1029,
+            151,
+            10
+          ],
+          [
+            17,
+            278,
+            1
+          ],
+          [
+            9,
+            20,
+            55
+          ]
+        ]
+      }
+    },
+    "TF-IDF + LogReg, repo-balanced (C=4)": {
+      "n": 1570,
+      "accuracy": 0.886,
+      "macro_f1": 0.8375,
+      "weighted_f1": 0.8917,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9767,
+          "recall": 0.8807,
+          "f1": 0.9262,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.6596,
+          "recall": 0.9426,
+          "f1": 0.7761,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.8649,
+          "recall": 0.7619,
+          "f1": 0.8101,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1048,
+            133,
+            9
+          ],
+          [
+            16,
+            279,
+            1
+          ],
+          [
+            9,
+            11,
+            64
+          ]
+        ]
+      }
+    },
+    "MiniLM embeddings + LogReg (C=4)": {
+      "n": 1570,
+      "accuracy": 0.7771,
+      "macro_f1": 0.6224,
+      "weighted_f1": 0.7999,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9528,
+          "recall": 0.7807,
+          "f1": 0.8582,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.6063,
+          "recall": 0.848,
+          "f1": 0.707,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.221,
+          "recall": 0.4762,
+          "f1": 0.3019,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            929,
+            139,
+            122
+          ],
+          [
+            26,
+            251,
+            19
+          ],
+          [
+            20,
+            24,
+            40
+          ]
+        ]
+      }
+    },
+    "Ensemble: TF-IDF + MiniLM": {
+      "n": 1570,
+      "accuracy": 0.872,
+      "macro_f1": 0.7769,
+      "weighted_f1": 0.8772,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9702,
+          "recall": 0.8765,
+          "f1": 0.921,
+          "support": 1190
+        },
+        "Feature": {
+          "precision": 0.6548,
+          "recall": 0.9291,
+          "f1": 0.7682,
+          "support": 296
+        },
+        "Documentation": {
+          "precision": 0.68,
+          "recall": 0.6071,
+          "f1": 0.6415,
+          "support": 84
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1043,
+            125,
+            22
+          ],
+          [
+            19,
+            275,
+            2
+          ],
+          [
+            13,
+            20,
+            51
+          ]
+        ]
+      }
+    }
+  },
+  "confidence_threshold": {
+    "rule": "lowest threshold whose VALIDATION accuracy on auto-labelled issues >= 0.95",
+    "picked_on_validation": 0.85,
+    "validation": [
+      {
+        "threshold": 0.35,
+        "coverage": 1.0,
+        "accuracy_on_auto_labelled": 0.8094
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.9961,
+        "accuracy_on_auto_labelled": 0.8112
+      },
+      {
+        "threshold": 0.45,
+        "coverage": 0.987,
+        "accuracy_on_auto_labelled": 0.8148
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.9629,
+        "accuracy_on_auto_labelled": 0.8236
+      },
+      {
+        "threshold": 0.55,
+        "coverage": 0.9239,
+        "accuracy_on_auto_labelled": 0.8373
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.8822,
+        "accuracy_on_auto_labelled": 0.854
+      },
+      {
+        "threshold": 0.65,
+        "coverage": 0.8419,
+        "accuracy_on_auto_labelled": 0.8748
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.8003,
+        "accuracy_on_auto_labelled": 0.8967
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.756,
+        "accuracy_on_auto_labelled": 0.9105
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.6949,
+        "accuracy_on_auto_labelled": 0.9326
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.6272,
+        "accuracy_on_auto_labelled": 0.9616
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.5368,
+        "accuracy_on_auto_labelled": 0.9842
+      },
+      {
+        "threshold": 0.95,
+        "coverage": 0.3689,
+        "accuracy_on_auto_labelled": 0.9947
+      }
+    ],
+    "test_at_picked": {
+      "threshold": 0.85,
+      "coverage": 0.6847,
+      "accuracy_on_auto_labelled": 0.9572
+    },
+    "test": [
+      {
+        "threshold": 0.35,
+        "coverage": 0.9994,
+        "accuracy_on_auto_labelled": 0.8866
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.9975,
+        "accuracy_on_auto_labelled": 0.8883
+      },
+      {
+        "threshold": 0.45,
+        "coverage": 0.9943,
+        "accuracy_on_auto_labelled": 0.8885
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.9822,
+        "accuracy_on_auto_labelled": 0.8943
+      },
+      {
+        "threshold": 0.55,
+        "coverage": 0.9554,
+        "accuracy_on_auto_labelled": 0.9067
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.9306,
+        "accuracy_on_auto_labelled": 0.9131
+      },
+      {
+        "threshold": 0.65,
+        "coverage": 0.8904,
+        "accuracy_on_auto_labelled": 0.9256
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.8535,
+        "accuracy_on_auto_labelled": 0.9328
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.807,
+        "accuracy_on_auto_labelled": 0.94
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.7535,
+        "accuracy_on_auto_labelled": 0.951
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.6847,
+        "accuracy_on_auto_labelled": 0.9572
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.5809,
+        "accuracy_on_auto_labelled": 0.9693
+      },
+      {
+        "threshold": 0.95,
+        "coverage": 0.4076,
+        "accuracy_on_auto_labelled": 0.9781
+      }
+    ]
+  },
+  "robustness": {
+    "original": {
+      "macro_f1": 0.8375,
+      "accuracy": 0.886,
+      "same_prediction_as_original": 1.0,
+      "ms_per_issue": 2.12
+    },
+    "title_only (empty body)": {
+      "macro_f1": 0.4936,
+      "accuracy": 0.4503,
+      "same_prediction_as_original": 0.5217,
+      "ms_per_issue": 0.07
+    },
+    "first_20_words": {
+      "macro_f1": 0.607,
+      "accuracy": 0.6178,
+      "same_prediction_as_original": 0.6936,
+      "ms_per_issue": 0.11
+    },
+    "typos_15pct_words": {
+      "macro_f1": 0.8316,
+      "accuracy": 0.8815,
+      "same_prediction_as_original": 0.986,
+      "ms_per_issue": 2.1
+    },
+    "lowercase_no_punctuation": {
+      "macro_f1": 0.8063,
+      "accuracy": 0.8478,
+      "same_prediction_as_original": 0.9497,
+      "ms_per_issue": 1.71
+    },
+    "very_long (x5 + log noise)": {
+      "macro_f1": 0.8578,
+      "accuracy": 0.9032,
+      "same_prediction_as_original": 0.9803,
+      "ms_per_issue": 12.2
+    }
+  },
+  "edge_cases": {
+    "emoji_only": {
+      "classification_decision": "needs_manual_review",
+      "top_guess": "Feature",
+      "confidence": 0.6769,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 482.1
+    },
+    "non_english": {
+      "classification_decision": "suggest_label",
+      "top_guess": "Feature",
+      "confidence": 0.7739,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 32.4
+    },
+    "50k_characters": {
+      "classification_decision": "needs_manual_review",
+      "top_guess": "Feature",
+      "confidence": 0.62,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 97.3
+    },
+    "only_code_block": {
+      "classification_decision": "needs_manual_review",
+      "top_guess": "Feature",
+      "confidence": 0.635,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 22.3
+    }
+  },
+  "repository_held_out": {
+    "per_repository": {
+      "ansible/ansible": {
+        "rows": 972,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8757,
+        "accuracy": 0.9064
+      },
+      "flutter/flutter": {
+        "rows": 48,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.0204,
+        "accuracy": 0.0208
+      },
+      "godotengine/godot": {
+        "rows": 674,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.3604,
+        "accuracy": 0.8086
+      },
+      "godotengine/godot-docs": {
+        "skipped": "2 rows, classes present ['Bug', 'Feature']"
+      },
+      "huggingface/transformers": {
+        "rows": 1210,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8175,
+        "accuracy": 0.9174
+      },
+      "kubernetes/kubernetes": {
+        "rows": 279,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.712,
+        "accuracy": 0.7885
+      },
+      "microsoft/TypeScript": {
+        "rows": 1026,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.5699,
+        "accuracy": 0.7749
+      },
+      "microsoft/vscode": {
+        "rows": 637,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.7434,
+        "accuracy": 0.7959
+      },
+      "pandas-dev/pandas": {
+        "rows": 519,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8913,
+        "accuracy": 0.9075
+      },
+      "rust-lang/rust": {
+        "rows": 1742,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.7241,
+        "accuracy": 0.7721
+      },
+      "scikit-learn/scikit-learn": {
+        "rows": 1442,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8478,
+        "accuracy": 0.9008
+      }
+    },
+    "mean_macro_f1": 0.6562
+  },
+  "duplicate_threshold_interim": {
+    "method": "hybrid",
+    "queries_not_marked_duplicate": 4065,
+    "queries_closed_as_duplicate": 103,
+    "top1_similarity_percentiles_non_duplicates": {
+      "50": 0.4445,
+      "90": 0.6307,
+      "95": 0.8407,
+      "99": 0.9457
+    },
+    "top1_similarity_closed_as_duplicate": [
+      0.2795,
+      0.3212,
+      0.3234,
+      0.3267,
+      0.3495,
+      0.3506,
+      0.3748,
+      0.3834,
+      0.3874,
+      0.3888,
+      0.3939,
+      0.4055,
+      0.4103,
+      0.4173,
+      0.419,
+      0.4318,
+      0.4378,
+      0.4398,
+      0.4414,
+      0.443,
+      0.4431,
+      0.4432,
+      0.4499,
+      0.4515,
+      0.454,
+      0.4573,
+      0.4642,
+      0.4658,
+      0.4695,
+      0.4704,
+      0.4706,
+      0.4732,
+      0.4759,
+      0.4811,
+      0.4819,
+      0.4823,
+      0.4825,
+      0.4826,
+      0.4849,
+      0.4853,
+      0.4914,
+      0.4915,
+      0.4923,
+      0.4936,
+      0.4958,
+      0.4962,
+      0.4973,
+      0.5004,
+      0.5013,
+      0.5015,
+      0.5045,
+      0.5052,
+      0.5083,
+      0.5085,
+      0.5095,
+      0.5127,
+      0.5128,
+      0.5136,
+      0.5136,
+      0.5137,
+      0.5156,
+      0.5192,
+      0.5202,
+      0.5244,
+      0.5262,
+      0.5308,
+      0.5323,
+      0.5334,
+      0.5358,
+      0.537,
+      0.5391,
+      0.5436,
+      0.5608,
+      0.5616,
+      0.564,
+      0.5732,
+      0.5756,
+      0.578,
+      0.5888,
+      0.5889,
+      0.5941,
+      0.5999,
+      0.6003,
+      0.6097,
+      0.612,
+      0.614,
+      0.6176,
+      0.6192,
+      0.6215,
+      0.6234,
+      0.6303,
+      0.6663,
+      0.6709,
+      0.6814,
+      0.6916,
+      0.7201,
+      0.7258,
+      0.7312,
+      0.8336,
+      0.9104,
+      0.9936,
+      1.0,
+      1.0
+    ],
+    "share_of_non_duplicates_flagged_at_threshold": {
+      "0.5": 0.2792,
+      "0.6": 0.1208,
+      "0.7": 0.0748,
+      "0.8": 0.0583,
+      "0.85": 0.0467,
+      "0.9": 0.0244
+    },
+    "caveat": "No canonical pairs yet (needs a token). Flag rate on non-duplicates approximates the false-alarm rate only."
+  }
+}

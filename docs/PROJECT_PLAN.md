@@ -240,6 +240,11 @@ same issue twice. The dashboard shows how many calls are left.
 
 ### M4 — Measure and improve
 
+> **Status (25 Nov 2026): done on the pilot data.** The ensemble reaches test Macro-F1 0.764
+> (target ≥ 0.75). Error analysis, robustness and threshold tuning are in
+> [`outputs/M4_EVALUATION.md`](../outputs/M4_EVALUATION.md). Duplicate Recall@5 waits for the
+> token.
+
 - A table comparing all models (accuracy, Macro-F1, weighted F1, per-class scores, confusion
   matrix).
 - Duplicates: Recall@1/5/10, MRR. We pick the "duplicate / human review / not duplicate"
@@ -251,6 +256,9 @@ same issue twice. The dashboard shows how many calls are left.
 - **Done when:** the evaluation report exists and the final model is chosen, with reasons.
 
 ### M5 — Deployment prototype (the FastAPI app)
+
+> **Status (25 Nov 2026): built and tested.** See [`outputs/M5_PROTOTYPE.md`](../outputs/M5_PROTOTYPE.md)
+> and [`DEPLOYMENT.md`](DEPLOYMENT.md). Remaining: connect the bot to your demo repo.
 
 | Endpoint | What it does |
 | --- | --- |

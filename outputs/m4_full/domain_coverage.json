@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-11-25T16:33:23+00:00",
+  "mean_macro_f1_on_unseen_web_app": {
+    "dev_tools_only": 0.7817,
+    "dev_tools_plus_other_web_apps": 0.7923
+  },
+  "per_repo": {
+    "supabase/supabase": {
+      "rows": 467,
+      "dev_tools_only": {
+        "macro_f1": 0.8352,
+        "accuracy": 0.8287
+      },
+      "dev_tools_plus_other_web_apps": {
+        "macro_f1": 0.863,
+        "accuracy": 0.863
+      }
+    },
+    "nextcloud/server": {
+      "rows": 153,
+      "dev_tools_only": {
+        "macro_f1": 0.9703,
+        "accuracy": 0.9739
+      },
+      "dev_tools_plus_other_web_apps": {
+        "macro_f1": 0.9563,
+        "accuracy": 0.9608
+      }
+    },
+    "RocketChat/Rocket.Chat": {
+      "rows": 88,
+      "dev_tools_only": {
+        "macro_f1": 0.841,
+        "accuracy": 0.8523
+      },
+      "dev_tools_plus_other_web_apps": {
+        "macro_f1": 0.6969,
+        "accuracy": 0.7045
+      }
+    },
+    "directus/directus": {
+      "rows": 344,
+      "dev_tools_only": {
+        "macro_f1": 0.6825,
+        "accuracy": 0.6802
+      },
+      "dev_tools_plus_other_web_apps": {
+        "macro_f1": 0.7771,
+        "accuracy": 0.782
+      }
+    },
+    "outline/outline": {
+      "rows": 244,
+      "dev_tools_only": {
+        "macro_f1": 0.7418,
+        "accuracy": 0.7459
+      },
+      "dev_tools_plus_other_web_apps": {
+        "macro_f1": 0.801,
+        "accuracy": 0.8033
+      }
+    },
+    "excalidraw/excalidraw": {
+      "rows": 503,
+      "dev_tools_only": {
+        "macro_f1": 0.6192,
+        "accuracy": 0.67
+      },
+      "dev_tools_plus_other_web_apps": {
+        "macro_f1": 0.6592,
+        "accuracy": 0.7038
+      }
+    }
+  },
+  "login_probes_model_trained_on_all": [
+    {
+      "Bug": 0.599,
+      "Documentation": 0.017,
+      "Feature": 0.384
+    },
+    {
+      "Bug": 0.731,
+      "Documentation": 0.017,
+      "Feature": 0.252
+    },
+    {
+      "Bug": 0.884,
+      "Documentation": 0.013,
+      "Feature": 0.103
+    }
+  ]
+}

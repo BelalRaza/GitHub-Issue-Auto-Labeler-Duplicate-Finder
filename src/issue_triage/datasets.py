@@ -50,6 +50,7 @@ def load_index_records(path: Path) -> list[IssueRecord]:
                     title=row["title"],
                     created_at=row["created_at"],
                     text=row["text_clean"],
+                    label=row["classification_target"] or None,
                 )
             )
     return records

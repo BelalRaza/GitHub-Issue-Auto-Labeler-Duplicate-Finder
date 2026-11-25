@@ -1,0 +1,777 @@
+{
+  "split_sizes": {
+    "train": 6928,
+    "validation": 1852,
+    "test": 1894
+  },
+  "fitted_on": "train+validation",
+  "chosen_model": {
+    "name": "tfidf_logreg",
+    "params": {
+      "C": 4.0,
+      "class_weight": "repo_balanced",
+      "word_ngrams": [
+        1,
+        2
+      ],
+      "char_ngrams": [
+        3,
+        5
+      ]
+    }
+  },
+  "test_comparison": {
+    "Majority class": {
+      "n": 1894,
+      "accuracy": 0.1806,
+      "macro_f1": 0.102,
+      "weighted_f1": 0.0552,
+      "per_class": {
+        "Bug": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1454
+        },
+        "Feature": {
+          "precision": 0.1806,
+          "recall": 1.0,
+          "f1": 0.3059,
+          "support": 342
+        },
+        "Documentation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 98
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            0,
+            1454,
+            0
+          ],
+          [
+            0,
+            342,
+            0
+          ],
+          [
+            0,
+            98,
+            0
+          ]
+        ]
+      }
+    },
+    "TF-IDF + LogReg (C=4)": {
+      "n": 1894,
+      "accuracy": 0.8775,
+      "macro_f1": 0.7808,
+      "weighted_f1": 0.8819,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9678,
+          "recall": 0.8879,
+          "f1": 0.9261,
+          "support": 1454
+        },
+        "Feature": {
+          "precision": 0.6398,
+          "recall": 0.9298,
+          "f1": 0.758,
+          "support": 342
+        },
+        "Documentation": {
+          "precision": 0.8413,
+          "recall": 0.5408,
+          "f1": 0.6584,
+          "support": 98
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1291,
+            153,
+            10
+          ],
+          [
+            24,
+            318,
+            0
+          ],
+          [
+            19,
+            26,
+            53
+          ]
+        ]
+      }
+    },
+    "TF-IDF + LogReg, repo-balanced (C=4)": {
+      "n": 1894,
+      "accuracy": 0.9002,
+      "macro_f1": 0.8314,
+      "weighted_f1": 0.9032,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9672,
+          "recall": 0.9113,
+          "f1": 0.9384,
+          "support": 1454
+        },
+        "Feature": {
+          "precision": 0.696,
+          "recall": 0.924,
+          "f1": 0.794,
+          "support": 342
+        },
+        "Documentation": {
+          "precision": 0.9143,
+          "recall": 0.6531,
+          "f1": 0.7619,
+          "support": 98
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1325,
+            123,
+            6
+          ],
+          [
+            26,
+            316,
+            0
+          ],
+          [
+            19,
+            15,
+            64
+          ]
+        ]
+      }
+    },
+    "MiniLM embeddings + LogReg (C=4)": {
+      "n": 1894,
+      "accuracy": 0.783,
+      "macro_f1": 0.6247,
+      "weighted_f1": 0.8048,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9481,
+          "recall": 0.7916,
+          "f1": 0.8628,
+          "support": 1454
+        },
+        "Feature": {
+          "precision": 0.6043,
+          "recall": 0.8304,
+          "f1": 0.6995,
+          "support": 342
+        },
+        "Documentation": {
+          "precision": 0.2286,
+          "recall": 0.4898,
+          "f1": 0.3117,
+          "support": 98
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1151,
+            163,
+            140
+          ],
+          [
+            36,
+            284,
+            22
+          ],
+          [
+            27,
+            23,
+            48
+          ]
+        ]
+      }
+    },
+    "Ensemble: TF-IDF + MiniLM": {
+      "n": 1894,
+      "accuracy": 0.8749,
+      "macro_f1": 0.7495,
+      "weighted_f1": 0.8792,
+      "per_class": {
+        "Bug": {
+          "precision": 0.9664,
+          "recall": 0.89,
+          "f1": 0.9266,
+          "support": 1454
+        },
+        "Feature": {
+          "precision": 0.6703,
+          "recall": 0.9094,
+          "f1": 0.7717,
+          "support": 342
+        },
+        "Documentation": {
+          "precision": 0.5714,
+          "recall": 0.5306,
+          "f1": 0.5503,
+          "support": 98
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Bug",
+          "Feature",
+          "Documentation"
+        ],
+        "rows_true_cols_pred": [
+          [
+            1294,
+            128,
+            32
+          ],
+          [
+            24,
+            311,
+            7
+          ],
+          [
+            21,
+            25,
+            52
+          ]
+        ]
+      }
+    }
+  },
+  "confidence_threshold": {
+    "rule": "lowest threshold whose VALIDATION accuracy on auto-labelled issues >= 0.95",
+    "picked_on_validation": 0.85,
+    "validation": [
+      {
+        "threshold": 0.35,
+        "coverage": 1.0,
+        "accuracy_on_auto_labelled": 0.8375
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.9973,
+        "accuracy_on_auto_labelled": 0.8387
+      },
+      {
+        "threshold": 0.45,
+        "coverage": 0.993,
+        "accuracy_on_auto_labelled": 0.8407
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.9714,
+        "accuracy_on_auto_labelled": 0.8488
+      },
+      {
+        "threshold": 0.55,
+        "coverage": 0.9276,
+        "accuracy_on_auto_labelled": 0.865
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.8817,
+        "accuracy_on_auto_labelled": 0.8855
+      },
+      {
+        "threshold": 0.65,
+        "coverage": 0.8472,
+        "accuracy_on_auto_labelled": 0.9012
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.8105,
+        "accuracy_on_auto_labelled": 0.9154
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.757,
+        "accuracy_on_auto_labelled": 0.9287
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.709,
+        "accuracy_on_auto_labelled": 0.9429
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.642,
+        "accuracy_on_auto_labelled": 0.9647
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.5497,
+        "accuracy_on_auto_labelled": 0.9823
+      },
+      {
+        "threshold": 0.95,
+        "coverage": 0.3904,
+        "accuracy_on_auto_labelled": 0.9945
+      }
+    ],
+    "test_at_picked": {
+      "threshold": 0.85,
+      "coverage": 0.7112,
+      "accuracy_on_auto_labelled": 0.9607
+    },
+    "test": [
+      {
+        "threshold": 0.35,
+        "coverage": 1.0,
+        "accuracy_on_auto_labelled": 0.9002
+      },
+      {
+        "threshold": 0.4,
+        "coverage": 0.9995,
+        "accuracy_on_auto_labelled": 0.9002
+      },
+      {
+        "threshold": 0.45,
+        "coverage": 0.9942,
+        "accuracy_on_auto_labelled": 0.9018
+      },
+      {
+        "threshold": 0.5,
+        "coverage": 0.9836,
+        "accuracy_on_auto_labelled": 0.9071
+      },
+      {
+        "threshold": 0.55,
+        "coverage": 0.9541,
+        "accuracy_on_auto_labelled": 0.9181
+      },
+      {
+        "threshold": 0.6,
+        "coverage": 0.9277,
+        "accuracy_on_auto_labelled": 0.9271
+      },
+      {
+        "threshold": 0.65,
+        "coverage": 0.9007,
+        "accuracy_on_auto_labelled": 0.9361
+      },
+      {
+        "threshold": 0.7,
+        "coverage": 0.8664,
+        "accuracy_on_auto_labelled": 0.9421
+      },
+      {
+        "threshold": 0.75,
+        "coverage": 0.8273,
+        "accuracy_on_auto_labelled": 0.9477
+      },
+      {
+        "threshold": 0.8,
+        "coverage": 0.7777,
+        "accuracy_on_auto_labelled": 0.9525
+      },
+      {
+        "threshold": 0.85,
+        "coverage": 0.7112,
+        "accuracy_on_auto_labelled": 0.9607
+      },
+      {
+        "threshold": 0.9,
+        "coverage": 0.6077,
+        "accuracy_on_auto_labelled": 0.9687
+      },
+      {
+        "threshold": 0.95,
+        "coverage": 0.4446,
+        "accuracy_on_auto_labelled": 0.9774
+      }
+    ]
+  },
+  "robustness": {
+    "original": {
+      "macro_f1": 0.8314,
+      "accuracy": 0.9002,
+      "same_prediction_as_original": 1.0,
+      "ms_per_issue": 2.0
+    },
+    "title_only (empty body)": {
+      "macro_f1": 0.4914,
+      "accuracy": 0.5185,
+      "same_prediction_as_original": 0.5681,
+      "ms_per_issue": 0.06
+    },
+    "first_20_words": {
+      "macro_f1": 0.6336,
+      "accuracy": 0.6563,
+      "same_prediction_as_original": 0.7059,
+      "ms_per_issue": 0.11
+    },
+    "typos_15pct_words": {
+      "macro_f1": 0.8129,
+      "accuracy": 0.8912,
+      "same_prediction_as_original": 0.9768,
+      "ms_per_issue": 1.96
+    },
+    "lowercase_no_punctuation": {
+      "macro_f1": 0.7953,
+      "accuracy": 0.8638,
+      "same_prediction_as_original": 0.9419,
+      "ms_per_issue": 1.59
+    },
+    "very_long (x5 + log noise)": {
+      "macro_f1": 0.8632,
+      "accuracy": 0.9261,
+      "same_prediction_as_original": 0.9641,
+      "ms_per_issue": 10.93
+    }
+  },
+  "edge_cases": {
+    "emoji_only": {
+      "classification_decision": "needs_manual_review",
+      "top_guess": "Feature",
+      "confidence": 0.7374,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 511.2
+    },
+    "non_english": {
+      "classification_decision": "suggest_label",
+      "top_guess": "Feature",
+      "confidence": 0.7231,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 32.9
+    },
+    "50k_characters": {
+      "classification_decision": "needs_manual_review",
+      "top_guess": "Bug",
+      "confidence": 0.5193,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 80.9
+    },
+    "only_code_block": {
+      "classification_decision": "needs_manual_review",
+      "top_guess": "Feature",
+      "confidence": 0.5694,
+      "duplicate_decision": "no_strong_match",
+      "latency_ms": 22.5
+    }
+  },
+  "repository_held_out": {
+    "per_repository": {
+      "RocketChat/Rocket.Chat": {
+        "rows": 105,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.7238,
+        "accuracy": 0.7238
+      },
+      "ansible/ansible": {
+        "rows": 972,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8783,
+        "accuracy": 0.9136
+      },
+      "directus/directus": {
+        "rows": 406,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.8211,
+        "accuracy": 0.835
+      },
+      "excalidraw/excalidraw": {
+        "rows": 593,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.7046,
+        "accuracy": 0.7251
+      },
+      "flutter/flutter": {
+        "rows": 48,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.0204,
+        "accuracy": 0.0208
+      },
+      "godotengine/godot": {
+        "rows": 674,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.3508,
+        "accuracy": 0.8249
+      },
+      "godotengine/godot-docs": {
+        "skipped": "2 rows, classes present ['Bug', 'Feature']"
+      },
+      "huggingface/transformers": {
+        "rows": 1210,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8004,
+        "accuracy": 0.9289
+      },
+      "kubernetes/kubernetes": {
+        "rows": 279,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.6711,
+        "accuracy": 0.7885
+      },
+      "microsoft/TypeScript": {
+        "rows": 1026,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.6111,
+        "accuracy": 0.8119
+      },
+      "microsoft/vscode": {
+        "rows": 637,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.7423,
+        "accuracy": 0.7896
+      },
+      "nextcloud/server": {
+        "rows": 181,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.9712,
+        "accuracy": 0.9724
+      },
+      "outline/outline": {
+        "rows": 288,
+        "classes": [
+          "Bug",
+          "Feature"
+        ],
+        "macro_f1": 0.8392,
+        "accuracy": 0.8125
+      },
+      "pandas-dev/pandas": {
+        "rows": 519,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8881,
+        "accuracy": 0.9056
+      },
+      "rust-lang/rust": {
+        "rows": 1742,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.6988,
+        "accuracy": 0.7675
+      },
+      "scikit-learn/scikit-learn": {
+        "rows": 1442,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.8491,
+        "accuracy": 0.9036
+      },
+      "supabase/supabase": {
+        "rows": 550,
+        "classes": [
+          "Bug",
+          "Documentation",
+          "Feature"
+        ],
+        "macro_f1": 0.6926,
+        "accuracy": 0.8636
+      }
+    },
+    "mean_macro_f1": 0.7039
+  },
+  "duplicate_threshold_interim": {
+    "method": "hybrid",
+    "queries_not_marked_duplicate": 4783,
+    "queries_closed_as_duplicate": 108,
+    "top1_similarity_percentiles_non_duplicates": {
+      "50": 0.4411,
+      "90": 0.6209,
+      "95": 0.8252,
+      "99": 0.9455
+    },
+    "top1_similarity_closed_as_duplicate": [
+      0.2796,
+      0.3205,
+      0.3265,
+      0.3276,
+      0.3497,
+      0.3507,
+      0.3751,
+      0.3822,
+      0.3874,
+      0.3889,
+      0.3941,
+      0.4071,
+      0.4072,
+      0.4105,
+      0.4181,
+      0.4193,
+      0.4318,
+      0.438,
+      0.4403,
+      0.4418,
+      0.4421,
+      0.4431,
+      0.4434,
+      0.4494,
+      0.4502,
+      0.4514,
+      0.4546,
+      0.4573,
+      0.4643,
+      0.4667,
+      0.47,
+      0.4708,
+      0.4709,
+      0.4728,
+      0.4762,
+      0.4804,
+      0.482,
+      0.482,
+      0.4833,
+      0.4845,
+      0.4858,
+      0.4865,
+      0.4919,
+      0.492,
+      0.4933,
+      0.4941,
+      0.4962,
+      0.4969,
+      0.4973,
+      0.501,
+      0.5013,
+      0.5015,
+      0.5056,
+      0.507,
+      0.5083,
+      0.509,
+      0.5104,
+      0.5127,
+      0.5135,
+      0.5136,
+      0.5141,
+      0.5143,
+      0.5171,
+      0.5198,
+      0.5207,
+      0.5228,
+      0.5247,
+      0.5262,
+      0.5316,
+      0.5321,
+      0.5336,
+      0.5363,
+      0.5375,
+      0.5392,
+      0.544,
+      0.5611,
+      0.5624,
+      0.5638,
+      0.5741,
+      0.5769,
+      0.5789,
+      0.5886,
+      0.5902,
+      0.5952,
+      0.6003,
+      0.6009,
+      0.6109,
+      0.6118,
+      0.6146,
+      0.618,
+      0.6197,
+      0.6215,
+      0.6222,
+      0.6223,
+      0.6304,
+      0.6677,
+      0.6726,
+      0.6822,
+      0.6921,
+      0.7235,
+      0.7266,
+      0.7319,
+      0.834,
+      0.911,
+      0.9936,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "share_of_non_duplicates_flagged_at_threshold": {
+      "0.5": 0.2731,
+      "0.6": 0.1158,
+      "0.7": 0.0696,
+      "0.8": 0.0537,
+      "0.85": 0.0427,
+      "0.9": 0.0226
+    },
+    "caveat": "No canonical pairs yet (needs a token). Flag rate on non-duplicates approximates the false-alarm rate only."
+  }
+}

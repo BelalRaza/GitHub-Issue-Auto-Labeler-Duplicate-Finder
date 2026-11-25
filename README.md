@@ -17,19 +17,28 @@ design, GitHub rate limits and the M3–M6 plan in plain language.
 | M1 Problem definition | ✅ Done | `docs/m1_m2/M1_M2_PROJECT_HANDBOOK.md` |
 | M2 Data preparation | ✅ Pilot done; full collection needs a token | `docs/m1_m2/M2_EDA_REPORT.md`, `data/raw/pilot/` |
 | M3 Models | ✅ Built and run on the pilot data | [`outputs/M3_RESULTS.md`](outputs/M3_RESULTS.md) |
-| M4 Evaluation | ⏳ Next | |
-| M5 Deployment (FastAPI + GitHub webhook) | ⏳ Planned | `docs/PROJECT_PLAN.md` §4–5 |
-| M6 Final delivery | ⏳ Planned | |
+| M4 Evaluation | ✅ Done on the pilot (duplicate Recall@5 waits for the token) | [`outputs/M4_EVALUATION.md`](outputs/M4_EVALUATION.md) |
+| M5 Deployment (FastAPI + GitHub webhook) | ✅ Built and tested; the live bot needs your demo repo | [`outputs/M5_PROTOTYPE.md`](outputs/M5_PROTOTYPE.md), [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) |
+| M6 Final delivery | ⏳ After the full data collection | |
 
-## M3 quick start (models)
+## Run the app
+
+```bash
+.venv/bin/uvicorn issue_triage.service.app:app --app-dir src --port 8000
+```
+
+Open http://localhost:8000. Setting up the live GitHub bot: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+## Set up and train (M3/M4)
 
 ```bash
 python3.13 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python scripts/prepare_dataset.py --input data/raw/pilot \
   --taxonomy config/label_taxonomy.json --output data/processed
-.venv/bin/python scripts/train_models.py        # trains + selects on validation -> models/
+.venv/bin/python scripts/train_models.py        # 8 candidates, 5-fold CV selection -> models/
 .venv/bin/python scripts/evaluate_retrieval.py  # TF-IDF vs BM25 vs embeddings vs hybrid
-.venv/bin/python -m unittest discover -s tests
+.venv/bin/python scripts/evaluate_models.py     # M4: test set, errors, robustness, thresholds
+.venv/bin/python -m unittest discover -s tests  # 33 tests
 ```
 
 To create a GitHub token, see [`docs/GITHUB_TOKEN_SETUP.md`](docs/GITHUB_TOKEN_SETUP.md).

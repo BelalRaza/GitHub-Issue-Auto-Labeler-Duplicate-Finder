@@ -146,20 +146,36 @@ def flatten_issue(wrapper: dict[str, Any], taxonomy: dict[str, Any]) -> dict[str
     }
 
 
-def assign_chronological_splits(rows: list[dict[str, Any]]) -> None:
-    """Assign global chronological 70/15/15 splits to classification-eligible rows."""
+def assign_chronological_splits(rows: list[dict[str, Any]], scope: str = "global") -> None:
+    """Assign chronological 70/15/15 splits to classification-eligible rows.
+
+    scope="global":     one timeline across all repositories (the M2 pilot setting).
+    scope="repository": each repository's own oldest 70% / next 15% / newest 15%. Used for the
+        full corpus, where label-targeted collection reaches back years for some labels: a
+        single global cut put almost every Documentation issue into training.
+    """
     eligible = [row for row in rows if row["classification_eligible"] and row.get("created_at")]
-    eligible.sort(key=lambda row: (row["created_at"], row["repository"], row["issue_number"] or 0))
-    count = len(eligible)
-    train_end = int(count * 0.70)
-    validation_end = train_end + int(count * 0.15)
-    for index, row in enumerate(eligible):
-        if index < train_end:
-            row["split"] = "train"
-        elif index < validation_end:
-            row["split"] = "validation"
-        else:
-            row["split"] = "test"
+    if scope == "repository":
+        groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for row in eligible:
+            groups[row["repository"]].append(row)
+        timelines = list(groups.values())
+    elif scope == "global":
+        timelines = [eligible]
+    else:
+        raise ValueError(f"unknown split scope {scope!r}")
+    for timeline in timelines:
+        timeline.sort(key=lambda row: (row["created_at"], row["repository"], row["issue_number"] or 0))
+        count = len(timeline)
+        train_end = int(count * 0.70)
+        validation_end = train_end + int(count * 0.15)
+        for index, row in enumerate(timeline):
+            if index < train_end:
+                row["split"] = "train"
+            elif index < validation_end:
+                row["split"] = "validation"
+            else:
+                row["split"] = "test"
 
 
 def build_quality_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:

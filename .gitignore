@@ -13,3 +13,13 @@ models/
 # Raw issue snapshots contain issue authors' usernames/profile data (see handbook risk register):
 # kept locally, not pushed. The checksum manifest IS committed so copies can be verified.
 data/raw/pilot/*.jsonl
+data/raw/labeled/*.jsonl
+data/raw/canonical/*.jsonl
+models_full/
+models_pilot/
+data/raw/labeled_webapps/*.jsonl
+data/raw/full_webapps/*.jsonl
+models_next/
+models_previous/
+data/triage.db
+data/triage.db-*

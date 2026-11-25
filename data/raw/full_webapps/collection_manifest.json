@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-11-25T16:28:38+00:00",
+  "record_count": 6,
+  "records": [
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:27:22+00:00",
+      "data_file": "supabase__supabase.jsonl",
+      "mode": "issues",
+      "pages_fetched": 5,
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "5000",
+        "reset": "1795627653",
+        "resource": "core"
+      },
+      "repository": "supabase/supabase",
+      "rows_written": 55,
+      "sha256": "d4c83ac5e9cdec742ee8d34083aa29bd859514a8be03520b58f54ca65aa45776"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:27:35+00:00",
+      "data_file": "nextcloud__server.jsonl",
+      "mode": "issues",
+      "pages_fetched": 5,
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4950",
+        "reset": "1795627543",
+        "resource": "core"
+      },
+      "repository": "nextcloud/server",
+      "rows_written": 87,
+      "sha256": "3f47db702e4d5ec514d477eca3823eca2d992a2994cea90ba4bce85f11134d15"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:27:47+00:00",
+      "data_file": "RocketChat__Rocket.Chat.jsonl",
+      "mode": "issues",
+      "pages_fetched": 5,
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4943",
+        "reset": "1795627543",
+        "resource": "core"
+      },
+      "repository": "RocketChat/Rocket.Chat",
+      "rows_written": 39,
+      "sha256": "7b455d0cb15682bf43aff684d9e2bb4ae28948d379903ccf1e2e7a25aca24701"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:28:01+00:00",
+      "data_file": "directus__directus.jsonl",
+      "mode": "issues",
+      "pages_fetched": 5,
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4934",
+        "reset": "1795627543",
+        "resource": "core"
+      },
+      "repository": "directus/directus",
+      "rows_written": 113,
+      "sha256": "628e3e9217c2f9ebb34de0251f8ee25d775b2ed88bafee099c140402406e55af"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:28:14+00:00",
+      "data_file": "outline__outline.jsonl",
+      "mode": "issues",
+      "pages_fetched": 5,
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4930",
+        "reset": "1795627542",
+        "resource": "core"
+      },
+      "repository": "outline/outline",
+      "rows_written": 74,
+      "sha256": "6a0b06a61755fde63e12de5ab47555537c39c42862e62ebda0054d667a947e70"
+    },
+    {
+      "api_version": "2026-03-10",
+      "authenticated": true,
+      "collected_at": "2026-11-25T16:28:25+00:00",
+      "data_file": "excalidraw__excalidraw.jsonl",
+      "mode": "issues",
+      "pages_fetched": 5,
+      "per_page": 100,
+      "rate_limit": {
+        "limit": "5000",
+        "remaining": "4925",
+        "reset": "1795627542",
+        "resource": "core"
+      },
+      "repository": "excalidraw/excalidraw",
+      "rows_written": 102,
+      "sha256": "f33bfa77a3da444d9f721dd8c44f9190757f23af7029c1cdb1d3b6307548a7d2"
+    }
+  ]
+}
